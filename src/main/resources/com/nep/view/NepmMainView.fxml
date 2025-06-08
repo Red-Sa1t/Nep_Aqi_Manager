@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.nep.controller.NepmMainViewController">
+    <children>
+        <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="650.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="公众监督员端">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#aqiInfo" text="AQI反馈数据查询" />
+                        <MenuItem mnemonicParsing="false" onAction="#aqiAssign" text="AQI反馈数据指派" />
+                    </items>
+
+                </Menu>
+
+                <Menu mnemonicParsing="false" text="网格员端">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#aqiConfirm" text="AQI确认数据查询" />
+                    </items>
+
+                </Menu>
+
+                <Menu mnemonicParsing="false" text="AQI信息统计">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="待开发" />
+                    </items>
+
+                </Menu>
+
+            </menus>
+
+        </MenuBar>
+
+        <ImageView fx:id="txt_imageView" fitHeight="425.0" fitWidth="650.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+
+        </ImageView>
+
+    </children>
+
+</AnchorPane>

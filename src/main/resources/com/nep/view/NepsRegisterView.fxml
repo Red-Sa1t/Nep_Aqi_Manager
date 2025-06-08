@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8"
+            fx:controller="com.nep.controller.NepsRegisterViewController">
+    <children>
+        <Label layoutX="181.0" layoutY="45.0" text="环保公众监督平台">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+
+        </Label>
+
+        <Label layoutX="262.0" layoutY="113.0" text="公众监督员注册">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+
+        </Label>
+
+        <Label layoutX="148.0" layoutY="173.0" text="注册手机号:">
+            <font>
+                <Font size="14.0" />
+            </font>
+
+        </Label>
+
+        <Label layoutX="148.0" layoutY="213.0" text="密码:">
+            <font>
+                <Font size="14.0" />
+            </font>
+
+        </Label>
+
+        <Label layoutX="148.0" layoutY="253.0" text="确认密码:">
+            <font>
+                <Font size="14.0" />
+            </font>
+
+        </Label>
+
+        <Label layoutX="148.0" layoutY="290.0" text="真实姓名:">
+            <font>
+                <Font size="14.0" />
+            </font>
+
+        </Label>
+
+        <Label layoutX="148.0" layoutY="330.0" text="性别:">
+            <font>
+                <Font size="14.0" />
+            </font>
+
+        </Label>
+
+        <TextField fx:id="txt_id" layoutX="262.0" layoutY="171.0" prefHeight="23.0" prefWidth="204.0" />
+        <PasswordField fx:id="txt_password" layoutX="262.0" layoutY="211.0" prefHeight="23.0" prefWidth="204.0" />
+        <PasswordField fx:id="txt_repassword" layoutX="262.0" layoutY="251.0" prefHeight="23.0" prefWidth="204.0" />
+        <TextField fx:id="txt_realName" layoutX="262.0" layoutY="288.0" prefHeight="23.0" prefWidth="204.0" />
+        <RadioButton fx:id="txt_sex" layoutX="262.0" layoutY="332.0" mnemonicParsing="false" selected="true" text="男">
+            <toggleGroup>
+                <ToggleGroup fx:id="sex" />
+            </toggleGroup>
+
+        </RadioButton>
+
+        <RadioButton fx:id="txt_sex" layoutX="325.0" layoutY="332.0" mnemonicParsing="false" text="女" toggleGroup="$sex" />
+        <Button layoutX="426.0" layoutY="380.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="90.0" text="注册">
+            <font>
+                <Font size="14.0" />
+            </font>
+
+        </Button>
+
+        <Button layoutX="168.0" layoutY="380.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="90.0" text="返回">
+            <font>
+                <Font size="14.0" />
+            </font>
+
+        </Button>
+
+    </children>
+
+</AnchorPane>

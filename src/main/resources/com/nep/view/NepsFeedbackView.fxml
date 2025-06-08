@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+            fx:controller="com.nep.controller.NepsFeedbackViewController">
+    <children>
+        <TableView fx:id="txt_tableView" layoutX="22.0" layoutY="68.0" prefHeight="340.0" prefWidth="650.0">
+
+        </TableView>
+
+        <Label layoutX="207.0" layoutY="23.0" text="历史反馈预估AQI信息列表">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+
+        </Label>
+
+        <Button layoutX="552.0" layoutY="434.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="91.0" text="返回">
+            <font>
+                <Font size="14.0" />
+            </font>
+
+        </Button>
+
+        <Label layoutX="537.0" layoutY="48.0" text="当前用户:" />
+        <Label fx:id="txt_realName" layoutX="598.0" layoutY="48.0" prefHeight="15.0" prefWidth="75.0" />
+    </children>
+
+</AnchorPane>

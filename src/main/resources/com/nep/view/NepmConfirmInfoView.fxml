@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.nep.controller.NepmConfirmInfoViewController">
+    <children>
+        <Label layoutX="269.0" layoutY="20.0" text="网格员AQI实测数据列表">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+
+        </Label>
+
+        <TableView fx:id="txt_tableView" layoutX="25.0" layoutY="65.0" prefHeight="367.0" prefWidth="750.0">
+
+        </TableView>
+
+    </children>
+
+</AnchorPane>
