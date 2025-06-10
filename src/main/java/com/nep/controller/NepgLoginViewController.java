@@ -1,8 +1,7 @@
 package com.nep.controller;
 
 import com.nep.NepgMain;
-//import com.nep.entity.GridMember;
-import com.nep.po.GridMember;
+import com.nep.entity.GridMember;
 import com.nep.service.GridMemberService;
 import com.nep.service.impl.GridMemberServiceImpl;
 import com.nep.util.JavafxUtil;

@@ -1,16 +1,15 @@
 package com.nep.controller;
 
-import com.nep.po.Supervisor;
+import com.nep.NepsMain;
+import com.nep.entity.Supervisor;
+import com.nep.service.SupervisorService;
+import com.nep.service.impl.SupervisorServiceImpl;
+import com.nep.util.JavafxUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import com.nep.util.JavafxUtil;
-import com.nep.NepsMain;
-//import com.nep.entity.Supervisor;
-import com.nep.service.SupervisorService;
-import com.nep.service.impl.SupervisorServiceImpl;
 
 public class NepsRegisterViewController {
     @FXML
@@ -59,7 +58,7 @@ public class NepsRegisterViewController {
             return;
         }
         Supervisor supervisor = new Supervisor();
-        supervisor.setTelId(txt_id.getText());
+        supervisor.setLoginCode(txt_id.getText());
         supervisor.setPassword(txt_password.getText());
         supervisor.setRealName(txt_realName.getText());
         supervisor.setSex(txt_sex.getText());

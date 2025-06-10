@@ -1,9 +1,17 @@
 package com.nep.controller;
 
-import com.nep.po.Aqi;
-import com.nep.po.AqiFeedback;
-import com.nep.po.GridProvince;
-import com.nep.po.Supervisor;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nep.NepsMain;
+import com.nep.entity.Aqi;
+import com.nep.entity.AqiFeedback;
+import com.nep.entity.ProvinceCity;
+import com.nep.entity.Supervisor;
+import com.nep.io.RWJsonTest;
+import com.nep.service.AqiFeedbackService;
+import com.nep.service.impl.AqiFeedbackServiceImpl;
+import com.nep.util.CommonUtil;
+import com.nep.util.JavafxUtil;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,17 +21,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import com.nep.util.JavafxUtil;
-import com.nep.NepsMain;
-//import com.nep.entity.Aqi;
-//import com.nep.entity.AqiFeedback;
-//import com.nep.entity.ProvinceCity;
-//import com.nep.entity.Supervisor;
-import com.nep.util.FileUtil;
-import com.nep.service.AqiFeedbackService;
-import com.nep.service.impl.AqiFeedbackServiceImpl;
-import com.nep.util.CommonUtil;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +46,10 @@ public class NepsSelectAqiViewController implements Initializable {
     public static Stage primaryStage;
     //当前登录成功的公众监督员用户身份
     public static Supervisor supervisor;
+
+    public static ClassLoader classLoader = RWJsonTest.class.getClassLoader();
+
+    public static ObjectMapper objectMapper = new ObjectMapper();
     //多态
     private AqiFeedbackService aqiFeedbackService = new AqiFeedbackServiceImpl();
 
@@ -105,9 +108,15 @@ public class NepsSelectAqiViewController implements Initializable {
 
         txt_tableView.getColumns().addAll(levelColumn, explainColumn,impactColumn);
         ObservableList<Aqi> data = FXCollections.observableArrayList();
-        String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
 
-        List<Aqi> alist = (List<Aqi>)FileUtil.readObject(ProPaht+"aqi.txt");
+        List<Aqi> alist = new ArrayList<>();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi.json");
+            alist = objectMapper.readValue(inputStream, new TypeReference<List<Aqi>>() {
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         for(Aqi aqi:alist){
             data.add(aqi);
         }
@@ -118,22 +127,29 @@ public class NepsSelectAqiViewController implements Initializable {
         }
         txt_level.setValue("预估AQI等级");
 
-        //初始化省市区域
-        List<GridProvince> plist = (List<GridProvince>)FileUtil.readObject(ProPaht+"province_city.txt");
-        for(GridProvince province:plist){
+        List<ProvinceCity> plist = new ArrayList<>();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/province_city.json");
+            plist = objectMapper.readValue(inputStream, new TypeReference<List<ProvinceCity>>() {
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (ProvinceCity province : plist) {
             txt_province.getItems().add(province.getProvinceName());
         }
         txt_province.setValue("请选择省区域");
         txt_city.setValue("请选择市区域");
+        List<ProvinceCity> finalPlist = plist;
         txt_province.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 // TODO Auto-generated method stub
                 txt_city.setItems(FXCollections.observableArrayList());	//先清空
                 List<String> clist = new ArrayList<String>();
-                for (int i = 0; i < plist.size(); i++) {
-                    if(newValue.equals(plist.get(i).getProvinceName())){
-                        clist = plist.get(i).getCityName();
+                for (int i = 0; i < finalPlist.size(); i++) {
+                    if (newValue.equals(finalPlist.get(i).getProvinceName())) {
+                        clist = finalPlist.get(i).getCityName();
                     }
                 }
                 for(String cityName:clist){
@@ -151,11 +167,11 @@ public class NepsSelectAqiViewController implements Initializable {
         AqiFeedback afb = new AqiFeedback();
         afb.setAddress(txt_address.getText());
         afb.setAfName(supervisor.getRealName());
-        afb.setProvinceName(txt_province.getValue());
+        afb.setProviceName(txt_province.getValue());
         afb.setCityName(txt_city.getValue());
-        afb.setEstimatedGrade(Integer.valueOf(txt_level.getValue()));
-        afb.setInformation(txt_information.getText());
-        afb.setAssignDate(CommonUtil.currentDate());
+        afb.setEstimateGrade(txt_level.getValue());
+        afb.setInfomation(txt_information.getText());
+        afb.setDate(CommonUtil.currentDate());
         afb.setState("未指派");
         aqiFeedbackService.saveFeedBack(afb);
         JavafxUtil.showAlert(primaryStage, "反馈信息成功", "您的预估AQI信息提交成功", "感谢您的反馈!","info");

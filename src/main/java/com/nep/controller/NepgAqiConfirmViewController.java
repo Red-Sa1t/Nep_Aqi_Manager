@@ -1,11 +1,9 @@
 package com.nep.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.nep.dto.AqiLimitDto;
-//import com.nep.entity.AqiFeedback;
-//import com.nep.entity.GridMember;
-import com.nep.po.AqiFeedback;
-import com.nep.po.GridMember;
-import com.nep.util.FileUtil;
+import com.nep.entity.AqiFeedback;
+import com.nep.entity.GridMember;
 import com.nep.service.AqiFeedbackService;
 import com.nep.service.impl.AqiFeedbackServiceImpl;
 import com.nep.util.CommonUtil;
@@ -24,9 +22,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static com.nep.controller.NepmConfirmInfoViewController.classLoader;
+import static com.nep.controller.NepmConfirmInfoViewController.objectMapper;
 
 public class NepgAqiConfirmViewController implements Initializable {
     @FXML
@@ -88,7 +91,7 @@ public class NepgAqiConfirmViewController implements Initializable {
         //初始化pane容器样式
         txt_pane.setStyle("-fx-border-color: #CCC;");
         // 初始化网格员姓名
-        label_realName.setText(gridMember.getGmName());
+        label_realName.setText(gridMember.getRealName());
         //初始化table 数据表
         TableColumn<AqiFeedback, Integer> afIdColumn = new TableColumn<>("编号");
         afIdColumn.setMinWidth(40);
@@ -130,18 +133,26 @@ public class NepgAqiConfirmViewController implements Initializable {
         ObservableList<AqiFeedback> data = FXCollections.observableArrayList();
         String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
 
-        List<AqiFeedback> afList = (List<AqiFeedback>) FileUtil.readObject(ProPaht+"aqifeedback.txt");
-        for(AqiFeedback afb:afList){
-            if(afb.getGmId() != null && afb.getGmName().equals(gridMember.getGmName()) && afb.getState().equals("已指派")){
-                data.add(afb);
+        List<AqiFeedback> afList = new ArrayList<>();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json");
+            afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
+            });
+            for (AqiFeedback afb : afList) {
+                if (afb.getGmName() != null && afb.getGmName().equals(gridMember.getRealName()) && afb.getState().equals("已指派")) {
+                    data.add(afb);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         txt_tableView.setItems(data);
         //添加编号文本框事件监听
-        txt_afId.focusedProperty().addListener((obs,wasFocused,isNowFocused)->{
+        List<AqiFeedback> finalAfList = afList;
+        txt_afId.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if(!isNowFocused){
                 boolean flag = true;
-                for(AqiFeedback afb:afList){
+                for (AqiFeedback afb : finalAfList) {
                     if(afb.getGmName() != null && afb.getAfId().toString().equals(txt_afId.getText()) ){
                         flag = false;
                         return;
@@ -227,17 +238,24 @@ public class NepgAqiConfirmViewController implements Initializable {
         afb.setConfirmDate(CommonUtil.currentDate());
         afb.setConfirmLevel(confirmDto.getLevel());
         afb.setConfirmExplain(confirmDto.getExplain());
-        afb.setGmName(gridMember.getGmName());
+        afb.setGmName(gridMember.getRealName());
         aqiFeedbackService.confirmData(afb);
         JavafxUtil.showAlert(primaryStage, "提交成功", "污染物实测数据提交成功", "","info");
         //刷新页面数据表格
         ObservableList<AqiFeedback> data = FXCollections.observableArrayList();
-        String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
-        List<AqiFeedback> aList = (List<AqiFeedback>)FileUtil.readObject(ProPaht+"aqifeedback.txt");
-        for(AqiFeedback a:aList){
-            if(a.getGmName() != null && a.getGmName().equals(gridMember.getGmName()) && a.getState().equals("已指派")){
-                data.add(a);
+        List<AqiFeedback> afList = new ArrayList<>();
+
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json");
+            afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
+            });
+            for (AqiFeedback a : afList) {
+                if (a.getGmName() != null && a.getGmName().equals(gridMember.getRealName()) && a.getState().equals("已指派")) {
+                    data.add(a);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         txt_tableView.setItems(data);
         reset();

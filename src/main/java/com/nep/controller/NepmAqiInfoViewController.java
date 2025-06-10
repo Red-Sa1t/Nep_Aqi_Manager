@@ -1,6 +1,9 @@
 package com.nep.controller;
 
-import com.nep.po.AqiFeedback;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nep.entity.AqiFeedback;
+import com.nep.io.RWJsonTest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,14 +11,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-//import com.nep.entity.AqiFeedback;
-import com.nep.util.FileUtil;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class NepmAqiInfoViewController implements Initializable {
+
+    public static ClassLoader classLoader = RWJsonTest.class.getClassLoader();
+
+    public static ObjectMapper objectMapper = new ObjectMapper();
 
     @FXML
     private TableView<AqiFeedback> txt_tableView;
@@ -65,16 +71,20 @@ public class NepmAqiInfoViewController implements Initializable {
         TableColumn<AqiFeedback, String> infoColumn = new TableColumn<>("反馈信息");
         infoColumn.setMinWidth(210);
         infoColumn.setCellValueFactory(new PropertyValueFactory<>("infomation"));
-
         txt_tableView.getColumns().addAll(afIdColumn, proviceNameColumn,cityNameColumn,estimateGradeColumn,dateColumn,afNameColumn,infoColumn);
         ObservableList<AqiFeedback> data = FXCollections.observableArrayList();
-        String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
-        List<AqiFeedback> afList = (List<AqiFeedback>) FileUtil.readObject(ProPaht+"aqifeedback.txt");
-        for(AqiFeedback afb:afList){
-            if(afb.getState().equals("未指派")){
-                data.add(afb);
-            }
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json");
+            List<AqiFeedback> afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
+            });
+            for (AqiFeedback afb : afList) {
+                if (afb.getState().equals("未指派")) {
+                    data.add(afb);
+                }
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         txt_tableView.setItems(data);
     }

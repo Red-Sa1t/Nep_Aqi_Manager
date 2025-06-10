@@ -1,8 +1,8 @@
-package com.nep.data;
+package com.nep.io;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nep.po.Admin;
+import com.nep.entity.Admin;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -42,18 +42,11 @@ public class RWJsonTest {
     // 用Jackson工具类写入json格式类型数据时，参照此方法内容
     public static void writeListByJson(List<Admin> admins) {
         try {
-            // 获取输出流，指向类路径下的目标文件
             OutputStream outputStream =
                     new FileOutputStream(RWJsonTest.class.getClassLoader().getResource("NepDatas/JSONData/admins.json").getFile());
 
-
-            // 下面的代码适用于创建新文件或覆盖现有文件的情况。
-            // 如果你想追加数据，或者处理文件不存在的情况，需要做相应的逻辑调整。
-
-            // 使用ObjectMapper将Employee对象列表序列化为JSON字符串，并写入输出流
             objectMapper.writeValue(outputStream, admins);
 
-            // 关闭输出流
             outputStream.close();
 
             System.out.println("数据写入成功.");
@@ -65,7 +58,7 @@ public class RWJsonTest {
     public static void main(String[] args) {
         // 调用读取json格式数据方法
         List<Admin> admins = getListByJackson();
-        admins.add(new Admin(1, "test", "123",null));
+        admins.add(new Admin("1", "123", "王一"));
         // 调用写入json格式数据方法
         writeListByJson(admins);
     }

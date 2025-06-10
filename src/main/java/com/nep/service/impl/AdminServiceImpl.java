@@ -1,22 +1,35 @@
 package com.nep.service.impl;
 
-//import com.nep.entity.Admin;
-import com.nep.po.Admin;
-import com.nep.util.FileUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nep.entity.Admin;
+import com.nep.io.RWJsonTest;
 import com.nep.service.AdminService;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminServiceImpl implements AdminService {
+
+    public static ClassLoader classLoader = RWJsonTest.class.getClassLoader();
+
+    public static ObjectMapper objectMapper = new ObjectMapper();
+
     @Override
     public boolean login(String loginCode, String password) {
-        // TODO Auto-generated method stub
-        String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
-        List<Admin> alist =(List<Admin>) FileUtil.readObject(ProPaht+"admin.txt");
-        for(Admin a : alist){
-            if(a.getAdminCode().equals(loginCode) && a.getPassword().equals(password)){
-                return true;
+        List<Admin> admin = new ArrayList<>();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/admins.json");
+            admin = objectMapper.readValue(inputStream, new TypeReference<List<Admin>>() {
+            });
+            for (Admin a : admin) {
+                if (a.getLoginCode().equals(loginCode) && a.getPassword().equals(password)) {
+                    return true;
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

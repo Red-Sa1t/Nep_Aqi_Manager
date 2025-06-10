@@ -1,7 +1,10 @@
 package com.nep.controller;
 
-import com.nep.po.AqiFeedback;
-import com.nep.po.Supervisor;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.nep.NepsMain;
+import com.nep.entity.AqiFeedback;
+import com.nep.entity.Supervisor;
+import com.nep.util.JavafxUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,15 +14,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import com.nep.util.JavafxUtil;
-import com.nep.NepsMain;
-//import com.nep.entity.AqiFeedback;
-//import com.nep.entity.Supervisor;
-import com.nep.util.FileUtil;
 
+import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static com.nep.controller.NepmConfirmInfoViewController.classLoader;
+import static com.nep.controller.NepmConfirmInfoViewController.objectMapper;
 
 public class NepsFeedbackViewController implements Initializable {
     @FXML
@@ -90,15 +93,20 @@ public class NepsFeedbackViewController implements Initializable {
 
         txt_tableView.getColumns().addAll(afIdColumn, proviceNameColumn,cityNameColumn,estimateGradeColumn,dateColumn,infoColumn);
         ObservableList<AqiFeedback> data = FXCollections.observableArrayList();
-        String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
+        List<AqiFeedback> afList = new ArrayList<>();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json");
+            afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
+            });
 
-        List<AqiFeedback> afList = (List<AqiFeedback>) FileUtil.readObject(ProPaht+"aqifeedback.txt");
-        System.out.println("afList"+afList);
-        for(int i = afList.size()-1;i>=0 ;i--){			//按照时间排序,有近到远
-            AqiFeedback afb = afList.get(i);
-            if(afb.getAfName().equals(supervisor.getRealName())){
-                data.add(afb);
+            for (int i = afList.size() - 1; i >= 0; i--) {            //按照时间排序,有近到远
+                AqiFeedback afb = afList.get(i);
+                if (afb.getAfName().equals(supervisor.getRealName())) {
+                    data.add(afb);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         txt_tableView.setItems(data);
     }

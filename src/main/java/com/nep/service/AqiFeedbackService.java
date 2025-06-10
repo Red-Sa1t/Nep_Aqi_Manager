@@ -1,8 +1,6 @@
 package com.nep.service;
 
-//import com.nep.entity.AqiFeedback;
-
-import com.nep.po.AqiFeedback;
+import com.nep.entity.AqiFeedback;
 
 public interface AqiFeedbackService {
     /**

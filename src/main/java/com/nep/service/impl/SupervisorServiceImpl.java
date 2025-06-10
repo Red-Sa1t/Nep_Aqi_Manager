@@ -1,23 +1,40 @@
 package com.nep.service.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nep.controller.NepsFeedbackViewController;
 import com.nep.controller.NepsSelectAqiViewController;
-//import com.nep.entity.Supervisor;
-import com.nep.po.Supervisor;
-import com.nep.util.FileUtil;
+import com.nep.entity.Supervisor;
+import com.nep.io.RWJsonTest;
 import com.nep.service.SupervisorService;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SupervisorServiceImpl implements SupervisorService {
+
+    public static ClassLoader classLoader = RWJsonTest.class.getClassLoader();
+
+    public static ObjectMapper objectMapper = new ObjectMapper();
+
     @Override
     public boolean login(String loginCode,String password) {
-        // TODO Auto-generated method stub
-        String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
-        List<Supervisor> slist =(List<Supervisor>) FileUtil.readObject(ProPaht+"supervisor.txt");
+        List<Supervisor> slist = new ArrayList<>();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/supervisor.json");
+            slist = objectMapper.readValue(inputStream, new TypeReference<List<Supervisor>>() {
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         boolean isLogin = false;
         for(Supervisor s:slist){
-            if(s.getTelId().equals(loginCode) && s.getPassword().equals(password)){
+            if (s.getLoginCode().equals(loginCode) && s.getPassword().equals(password)) {
                 NepsSelectAqiViewController.supervisor = s;	//将当前登录成功用户身份共享给下一个界面
                 NepsFeedbackViewController.supervisor = s;	//将当前登录成功用户身份共享给下一个界面
                 return true;
@@ -28,17 +45,25 @@ public class SupervisorServiceImpl implements SupervisorService {
 
     @Override
     public boolean register(Supervisor supervisor) {
-        // TODO Auto-generated method stub
-        String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
-        List<Supervisor> slist = (List<Supervisor>)FileUtil.readObject(ProPaht+"supervisor.txt");
-        System.out.println(slist.size());
-        for(Supervisor s:slist){
-            if(s.getTelId().equals(supervisor.getTelId())){
-                return false;
+        List<Supervisor> slist = new ArrayList<>();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/supervisor.json");
+            slist = objectMapper.readValue(inputStream, new TypeReference<List<Supervisor>>() {
+            });
+            for (Supervisor s : slist) {
+                if (s.getLoginCode().equals(supervisor.getLoginCode())) {
+                    return false;
+                }
             }
+            slist.add(supervisor);
+            Path path = Paths.get("src/main/resources/NepDatas/JSONData/supervisor.json");
+            OutputStream outputStream = new FileOutputStream(path.toFile());
+            objectMapper.writeValue(outputStream, slist);
+
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        slist.add(supervisor);
-        FileUtil.writeObject(ProPaht+"supervisor.txt", slist);
         return true;
     }
 }

@@ -1,7 +1,13 @@
 package com.nep.controller;
 
-import com.nep.po.AqiFeedback;
-import com.nep.po.GridMember;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nep.entity.AqiFeedback;
+import com.nep.entity.GridMember;
+import com.nep.io.RWJsonTest;
+import com.nep.service.AqiFeedbackService;
+import com.nep.service.impl.AqiFeedbackServiceImpl;
+import com.nep.util.JavafxUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -9,14 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import com.nep.util.JavafxUtil;
-//import com.nep.entity.AqiFeedback;
-//import com.nep.entity.GridMember;
-import com.nep.util.FileUtil;
-import com.nep.service.AqiFeedbackService;
-import com.nep.service.impl.AqiFeedbackServiceImpl;
 
+import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -69,6 +71,11 @@ public class NepmAqiAssignViewController implements Initializable {
     public void setTxt_pane3(Pane txt_pane3) {
         this.txt_pane3 = txt_pane3;
     }
+
+    public static ClassLoader classLoader = RWJsonTest.class.getClassLoader();
+
+    public static ObjectMapper objectMapper = new ObjectMapper();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -79,20 +86,30 @@ public class NepmAqiAssignViewController implements Initializable {
         //标签初始化
         initConroller();
         //初始化网格员
-        String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
-        List<GridMember> glist = (List<GridMember>) FileUtil.readObject(ProPaht+"gridmember.txt");
-        for (GridMember gm : glist) {
-            if(gm.getState().equals("工作中")){
-                combo_realName.getItems().add(gm.getGmName());
+        List<GridMember> glist = new ArrayList<>();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/grid_member.json");
+            glist = objectMapper.readValue(inputStream, new TypeReference<List<GridMember>>() {
+            });
+            for (GridMember gm : glist) {
+                if (gm.getState().equals("工作中")) {
+                    combo_realName.getItems().add(gm.getRealName());
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public void queryFeedback(){
         String afId = txt_afId.getText();
-        String ProPaht = System.getProperty("user.dir") + "/src/main/resources/NepDatas/ObjectData/";
 
-        List<AqiFeedback> alist = (List<AqiFeedback>)FileUtil.readObject(ProPaht+"aqifeedback.txt");
+        List<AqiFeedback> alist = new ArrayList<>();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json");
+            alist = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
+            });
+
         boolean flag = true;
         for (AqiFeedback af : alist) {
             if(af.getAfId().toString().equals(afId) && af.getState().equals("未指派")){
@@ -101,17 +118,19 @@ public class NepmAqiAssignViewController implements Initializable {
                 label_afName.setText(af.getAfName());
                 label_address.setText(af.getAddress());
                 label_cityName.setText(af.getCityName());
-                label_date.setText(af.getAssignDate().toString());
-                label_estimateGrade.setText(af.getEstimatedGrade().toString());
-                label_infomation.setText(af.getInformation());
-                label_proviceName.setText(af.getProvinceName());
+                label_date.setText(af.getDate());
+                label_estimateGrade.setText(af.getEstimateGrade());
+                label_infomation.setText(af.getInfomation());
+                label_proviceName.setText(af.getProviceName());
                 break;
             }
-
         }
         if(flag){
             JavafxUtil.showAlert(aqiInfoStage, "查询失败", "未找到当前编号反馈信息", "请重新输入AQI反馈数据编号","warn");
             initConroller();
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
