@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.nep.controller.NepgLoginViewController">
+<?import io.github.palexdev.materialfx.controls.*?>
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nep.controller.NepgLoginViewController">
     <children>
         <Label layoutX="181.0" layoutY="56.0" text="环保公众监督平台">
             <font>
@@ -39,12 +37,12 @@
 
         <TextField fx:id="txt_id" layoutX="264.0" layoutY="196.0" prefHeight="24.0" prefWidth="220.0" />
         <PasswordField fx:id="txt_password" layoutX="264.0" layoutY="262.0" prefHeight="23.0" prefWidth="220.0" />
-        <Button layoutX="379.0" layoutY="349.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="90.0" text="登录">
+        <MFXButton layoutX="379.0" layoutY="349.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="90.0" text="登录">
             <font>
                 <Font size="14.0" />
             </font>
 
-        </Button>
+        </MFXButton>
 
     </children>
 
