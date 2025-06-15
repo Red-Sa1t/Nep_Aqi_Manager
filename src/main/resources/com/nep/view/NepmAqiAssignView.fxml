@@ -1,83 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
+            prefWidth="650.0" stylesheets="@../css/ChecksRadiosToggles.css"
+            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.NepmAqiAssignViewController">
+    <!-- Header Label -->
+    <Label layoutX="182.0" layoutY="24.0" styleClass="header-label" text="公众监督AQI反馈数据指派">
+        <font>
+            <Font name="System Bold" size="24.0"/>
+        </font>
+    </Label>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.nep.controller.NepmAqiAssignViewController">
-    <children>
-        <Label layoutX="294.0" layoutY="32.0" />
-        <Label layoutX="182.0" layoutY="24.0" text="公众监督AQI反馈数据指派">
+    <!-- First Panel (Input AQI ID) -->
+    <Pane fx:id="txt_pane1" layoutX="30.0" layoutY="75.0" prefHeight="56.0" prefWidth="590.0">
+        <StackPane prefHeight="56.0" prefWidth="590.0" styleClass="grid-background"/>
+
+        <Label layoutX="14.0" layoutY="19.0" styleClass="sub-header-label" text="请输入AQI反馈数据编号:">
             <font>
-                <Font name="System Bold" size="24.0" />
+                <Font size="14.0"/>
             </font>
-
         </Label>
 
-        <Pane fx:id="txt_pane1" layoutX="30.0" layoutY="75.0" prefHeight="56.0" prefWidth="590.0">
-            <children>
-                <Label layoutX="14.0" layoutY="19.0" text="请输入AQI反馈数据编号:">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
+        <MFXTextField fx:id="txt_afId" layoutX="179.0" layoutY="4.0" prefHeight="48.0" prefWidth="276.0"
+                      styleClass="custom-field"/>
 
-                </Label>
+        <MFXButton buttonType="RAISED" layoutX="460.0" layoutY="10.0" minHeight="27.0" minWidth="70.0"
+                   onAction="#queryFeedback" prefHeight="38.0" prefWidth="90.0" styleClass="action-button"
+                   text="查询"/>
+    </Pane>
 
-                <TextField fx:id="txt_afId" layoutX="182.0" layoutY="17.0" prefHeight="23.0" prefWidth="258.0" />
-                <Button layoutX="468.0" layoutY="14.0" mnemonicParsing="false" onAction="#queryFeedback" prefHeight="23.0" prefWidth="90.0" text="查询">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
+    <!-- Second Panel (AQI Feedback Info) -->
+    <Pane fx:id="txt_pane2" layoutX="30.0" layoutY="140.0" prefHeight="170.0" prefWidth="590.0">
+        <StackPane prefHeight="170.0" prefWidth="590.0" styleClass="grid-background"/>
 
-                </Button>
+        <Label layoutX="29.0" layoutY="13.0" styleClass="form-label" text="AQI反馈数据编号:"/>
+        <Label fx:id="label_afId" layoutX="150.0" layoutY="13.0" prefHeight="15.0" prefWidth="82.0"
+               styleClass="form-value"/>
 
-            </children>
+        <Label layoutX="29.0" layoutY="43.0" styleClass="form-label" text="所在省区域:"/>
+        <Label fx:id="label_proviceName" layoutX="150.0" layoutY="43.0" prefHeight="15.0" prefWidth="82.0"
+               styleClass="form-value"/>
 
-        </Pane>
+        <Label layoutX="320.0" layoutY="43.0" styleClass="form-label" text="所在市区域:"/>
+        <Label fx:id="label_cityName" layoutX="410.0" layoutY="43.0" prefHeight="15.0" prefWidth="82.0"
+               styleClass="form-value"/>
 
-        <Pane fx:id="txt_pane2" layoutX="30.0" layoutY="140.0" prefHeight="170.0" prefWidth="590.0">
-            <children>
-                <Label layoutX="29.0" layoutY="13.0" text="AQI反馈数据编号:" />
-                <Label fx:id="label_afId" layoutX="150.0" layoutY="13.0" prefHeight="15.0" prefWidth="82.0" />
-                <Label layoutX="29.0" layoutY="43.0" text="所在省区域:" />
-                <Label fx:id="label_proviceName" layoutX="150.0" layoutY="43.0" prefHeight="15.0" prefWidth="82.0" />
-                <Label layoutX="320.0" layoutY="43.0" text="所在市区域:" />
-                <Label fx:id="label_afName" layoutX="410.0" layoutY="103.0" prefHeight="15.0" prefWidth="82.0" />
-                <Label layoutX="29.0" layoutY="73.0" prefHeight="15.0" prefWidth="56.0" text="详细地址:" />
-                <Label fx:id="label_address" layoutX="150.0" layoutY="73.0" prefHeight="15.0" prefWidth="440.0" />
-                <Label layoutX="29.0" layoutY="103.0" text="预估AQI等级:" />
-                <Label fx:id="label_estimateGrade" layoutX="150.0" layoutY="103.0" prefHeight="15.0" prefWidth="82.0" />
-                <Label layoutX="29.0" layoutY="134.0" text="反馈信息详情:" />
-                <Label fx:id="label_infomation" layoutX="150.0" layoutY="134.0" prefHeight="19.0" prefWidth="440.0" />
-                <Label layoutX="320.0" layoutY="103.0" text="反馈者姓名:" />
-                <Label fx:id="label_date" layoutX="410.0" layoutY="13.0" prefHeight="15.0" prefWidth="82.0" />
-                <Label layoutX="320.0" layoutY="13.0" text="反馈日期:" />
-                <Label fx:id="label_cityName" layoutX="410.0" layoutY="43.0" prefHeight="15.0" prefWidth="82.0" />
-            </children>
+        <Label layoutX="29.0" layoutY="73.0" prefHeight="15.0" prefWidth="56.0" styleClass="form-label"
+               text="详细地址:"/>
+        <Label fx:id="label_address" layoutX="150.0" layoutY="73.0" prefHeight="15.0" prefWidth="440.0"
+               styleClass="form-value"/>
 
-        </Pane>
+        <Label layoutX="29.0" layoutY="103.0" styleClass="form-label" text="预估AQI等级:"/>
+        <Label fx:id="label_estimateGrade" layoutX="150.0" layoutY="103.0" prefHeight="15.0" prefWidth="82.0"
+               styleClass="form-value"/>
 
-        <Pane fx:id="txt_pane3" layoutX="30.0" layoutY="328.0" prefHeight="91.0" prefWidth="590.0">
-            <children>
-                <Label layoutX="20.0" layoutY="6.0" text="公众监督AQI反馈数据任务指派:">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
+        <Label layoutX="320.0" layoutY="103.0" styleClass="form-label" text="反馈者姓名:"/>
+        <Label fx:id="label_afName" layoutX="410.0" layoutY="103.0" prefHeight="15.0" prefWidth="82.0"
+               styleClass="form-value"/>
 
-                </Label>
+        <Label layoutX="29.0" layoutY="134.0" styleClass="form-label" text="反馈信息详情:"/>
+        <Label fx:id="label_infomation" layoutX="150.0" layoutY="134.0" prefHeight="19.0" prefWidth="440.0"
+               styleClass="form-value"/>
 
-                <Label layoutX="33.0" layoutY="46.0" text="请选择您要指派的网格员:" />
-                <ComboBox fx:id="combo_realName" layoutX="194.0" layoutY="42.0" prefHeight="23.0" prefWidth="142.0" />
-                <Button layoutX="425.0" layoutY="39.0" mnemonicParsing="false" onAction="#assignGridMember" prefHeight="29.0" prefWidth="90.0" text="立即指派" />
-            </children>
+        <Label layoutX="320.0" layoutY="13.0" styleClass="form-label" text="反馈日期:"/>
+        <Label fx:id="label_date" layoutX="410.0" layoutY="13.0" prefHeight="15.0" prefWidth="82.0"
+               styleClass="form-value"/>
+    </Pane>
 
-        </Pane>
+    <!-- Third Panel (Assign Grid Member) -->
+    <Pane fx:id="txt_pane3" layoutX="30.0" layoutY="328.0" prefHeight="91.0" prefWidth="590.0">
+        <StackPane prefHeight="91.0" prefWidth="590.0" styleClass="grid-background"/>
 
-    </children>
+        <Label layoutX="20.0" layoutY="6.0" styleClass="sub-header-label" text="公众监督AQI反馈数据任务指派:">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
 
+        <Label layoutX="33.0" layoutY="46.0" styleClass="form-label" text="请选择您要指派的网格员:"/>
+
+        <MFXComboBox fx:id="combo_realName" layoutX="194.0" layoutY="42.0" prefHeight="32.0" prefWidth="142.0"
+                     styleClass="custom-combo">
+            <font>
+                <Font name="Microsoft YaHei" size="12.0"/>
+            </font>
+        </MFXComboBox>
+
+        <MFXButton buttonType="RAISED" layoutX="425.0" layoutY="39.0" onAction="#assignGridMember" prefHeight="29.0"
+                   prefWidth="90.0" styleClass="action-button" text="立即指派"/>
+    </Pane>
 </AnchorPane>
-

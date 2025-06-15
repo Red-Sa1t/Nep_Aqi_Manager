@@ -84,3 +84,8 @@
 	-fx-font-family: 'Open Sans SemiBold';
 	-fx-font-size: 11;
 }
+
+.MFXTextField {
+    -fx-font-family: "Source Han Sans";
+    -fx-font-size: 20px;
+}

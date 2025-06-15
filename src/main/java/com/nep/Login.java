@@ -18,15 +18,10 @@
 
 package com.nep;
 
+import com.nep.controller.InitController;
 import fr.brouillard.oss.cssfx.CSSFX;
-import com.nep.controller.DemoController;
-//import io.github.palexdev.materialfx.theming.JavaFXThemes;
-//import io.github.palexdev.materialfx.theming.MaterialFXStylesheets;
-//import io.github.palexdev.materialfx.theming.UserAgentBuilder;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
 import io.github.palexdev.materialfx.css.themes.Themes;
-//import io.github.palexdev.materialfx.theming.JavaFXThemes;
-//import io.github.palexdev.materialfx.theming.MaterialFXStylesheets;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,7 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class Demo extends Application {
+public class Login extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -51,7 +46,7 @@ public class Demo extends Application {
 
 
 		FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/Demo.fxml"));
-		loader.setControllerFactory(c -> new DemoController(primaryStage));
+		loader.setControllerFactory(c -> new InitController(primaryStage));
 		Parent root = loader.load();
 
 		Scene scene = new Scene(root);
@@ -59,7 +54,7 @@ public class Demo extends Application {
 		scene.setFill(Color.TRANSPARENT);
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("MaterialFX Demo");
+		primaryStage.setTitle("Login");
 		primaryStage.show();
 
 		//ScenicView.show(scene);

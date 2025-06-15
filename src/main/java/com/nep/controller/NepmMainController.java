@@ -9,6 +9,8 @@ package com.nep.controller;
 //import io.github.palexdev.materialfx.utils.others.loader.MFXLoader;
 //import io.github.palexdev.materialfx.utils.others.loader.MFXLoaderBean;
 //import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
+
+import com.nep.MFXDemoResourcesLoader;
 import io.github.palexdev.materialfx.controls.MFXIconWrapper;
 import io.github.palexdev.materialfx.controls.MFXRectangleToggleNode;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
@@ -21,7 +23,6 @@ import javafx.application.Platform;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -39,16 +40,13 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.nep.MFXDemoResourcesLoader;
-
 import static com.nep.MFXDemoResourcesLoader.loadURL;
 
-public class DemoController implements Initializable {
+public class NepmMainController implements Initializable {
     private final Stage stage;
+    private final ToggleGroup toggleGroup;
     private double xOffset;
     private double yOffset;
-    private final ToggleGroup toggleGroup;
-
     @FXML
     private HBox windowHeader;
 
@@ -76,7 +74,7 @@ public class DemoController implements Initializable {
     @FXML
     private StackPane logoContainer;
 
-    public DemoController(Stage stage) {
+    public NepmMainController(Stage stage) {
         this.stage = stage;
         this.toggleGroup = new ToggleGroup();
         ToggleButtonsUtil.addAlwaysOneSelectedSupport(toggleGroup);
@@ -126,18 +124,18 @@ public class DemoController implements Initializable {
 
     private void initializeLoader() {
         MFXLoader loader = new MFXLoader();
-        loader.addView(MFXLoaderBean.of("BUTTONS", loadURL("view/Buttons.fxml")).setBeanToNodeMapper(() -> createToggle("fas-circle-dot", "Buttons")).setDefaultRoot(true).get());
-        loader.addView(MFXLoaderBean.of("CHECKS_RADIOS_TOGGLES", loadURL("view/ChecksRadiosToggles.fxml")).setBeanToNodeMapper(() -> createToggle("fas-toggle-on", "Checks, Radios, Toggles")).get());
-//        loader.addView(MFXLoaderBean.of("COMBOS", loadURL("fxml/ComboBoxes.fxml")).setBeanToNodeMapper(() -> createToggle("fas-square-caret-down", "ComboBoxes")).get());
-//        loader.addView(MFXLoaderBean.of("DIALOGS", loadURL("fxml/Dialogs.fxml")).setBeanToNodeMapper(() -> createToggle("fas-comments", "Dialogs")).setControllerFactory(c -> new DialogsController(stage)).get());
-//        loader.addView(MFXLoaderBean.of("TEXT-FIELDS", loadURL("fxml/TextFields.fxml")).setBeanToNodeMapper(() -> createToggle("fas-italic", "Fields")).get());
-//        loader.addView(MFXLoaderBean.of("LISTS", loadURL("fxml/ListViews.fxml")).setBeanToNodeMapper(() -> createToggle("fas-rectangle-list", "Lists")).get());
-//        loader.addView(MFXLoaderBean.of("NOTIFICATIONS", loadURL("fxml/Notifications.fxml")).setBeanToNodeMapper(() -> createToggle("fas-bell", "Notifications")).setControllerFactory(c -> new NotificationsController(stage)).get());
+//        loader.addView(MFXLoaderBean.of("用户登录", loadURL("view/NepLogin.fxml")).setBeanToNodeMapper(() -> createToggle("fas-stairs", "用户登录")).setDefaultRoot(true).get());
+        loader.addView(MFXLoaderBean.of("公众监督AQI反馈数据列表", loadURL("view/NepmAqiInfoView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-circle-dot", "公共监督AQI反馈数据列表")).setDefaultRoot(true).get());
+        loader.addView(MFXLoaderBean.of("公众监督AQI反馈数据指派", loadURL("view/NepmAqiAssignView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-toggle-on", "公众监督AQI反馈数据指派")).get());
+//        loader.addView(MFXLoaderBean.of("管理AQI实测数据信息", loadURL("view/NepgAqiConfirmView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-square-caret-down", "管理AQI实测数据信息")).setDefaultRoot(true).get());
+        loader.addView(MFXLoaderBean.of("网格员AQI实测数据列表", loadURL("view/NepmConfirmInfoView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-comments", "网格员AQI实测数据列表")).get());
+//        loader.addView(MFXLoaderBean.of("历史反馈预估AQI信息列表", loadURL("view/NepsFeedbackView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-italic", "历史反馈预估AQI信息列表")).get());
+//        loader.addView(MFXLoaderBean.of("公众监督员信息反馈", loadURL("view/NepsFeedbackView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-rectangle-list", "公众监督员信息反馈")).get());
+//        loader.addView(MFXLoaderBean.of("公众监督员注册", loadURL("view/NepsRegisterView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-bell", "公众监督员注册")).get());
 //        loader.addView(MFXLoaderBean.of("PICKERS", loadURL("fxml/Pickers.fxml")).setBeanToNodeMapper(() -> createToggle("fas-calendar", "Pickers")).get());
 //        loader.addView(MFXLoaderBean.of("PROGRESS", loadURL("fxml/Progress.fxml")).setBeanToNodeMapper(() -> createToggle("fas-bars-progress", "Progress")).get());
 //        loader.addView(MFXLoaderBean.of("SCROLL-PANES", loadURL("fxml/ScrollPanes.fxml")).setBeanToNodeMapper(() -> createToggle("fas-bars-progress", "Scroll Panes", 90)).get());
 //        loader.addView(MFXLoaderBean.of("SLIDERS", loadURL("fxml/Sliders.fxml")).setBeanToNodeMapper(() -> createToggle("fas-sliders", "Sliders")).get());
-//        loader.addView(MFXLoaderBean.of("STEPPER", loadURL("fxml/Stepper.fxml")).setBeanToNodeMapper(() -> createToggle("fas-stairs", "Stepper")).get());
         //loader.addView(MFXLoaderBean.of("TABLES", loadURL("view/TableViews.fxml")).setBeanToNodeMapper(() -> createToggle("fas-table", "Tables")).get());
 //        loader.addView(MFXLoaderBean.of("FONT-RESOURCES", loadURL("fxml/FontResources.fxml")).setBeanToNodeMapper(() -> createToggle("fas-icons", "Font Resources")).get());
         loader.setOnLoadedAction(beans -> {

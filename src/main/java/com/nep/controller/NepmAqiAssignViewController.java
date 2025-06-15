@@ -8,9 +8,9 @@ import com.nep.io.RWJsonTest;
 import com.nep.service.AqiFeedbackService;
 import com.nep.service.impl.AqiFeedbackServiceImpl;
 import com.nep.util.JavafxUtil;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -48,7 +48,7 @@ public class NepmAqiAssignViewController implements Initializable {
     @FXML
     private Label  label_date;
     @FXML
-    private ComboBox<String> combo_realName;
+    private MFXComboBox<String> combo_realName;
     //当前舞台
     public static Stage aqiInfoStage;
     //多态

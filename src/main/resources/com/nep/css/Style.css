@@ -1,0 +1,70 @@
+/* 设置背景颜色 */
+.login-container {
+    -fx-background-color: #f0f4f8;
+    -fx-padding: 20;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+/* 标题 */
+.login-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding: 10;
+}
+
+/* 输入框样式 */
+.login-input {
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 5px;
+    -fx-focus-color: #4A90E2;
+    -fx-pref-width: 300px;
+}
+
+/* 密码框 */
+.MFXPasswordField {
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 5px;
+    -fx-focus-color: #4A90E2;
+}
+
+/* 单选框样式 */
+.MFXRadioButton {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+}
+
+/* 单选框选中效果 */
+.MFXRadioButton:selected {
+    -fx-text-fill: #4A90E2;
+}
+
+/* 登录按钮 */
+.login-button {
+    -fx-background-color: #4A90E2;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #4A90E2;
+    -fx-border-radius: 5px;
+}
+
+/* 登录按钮鼠标悬浮效果 */
+.login-button:hover {
+    -fx-background-color: #357ABD;
+}
+
+/* 错误提示文本 */
+.error-text {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+    -fx-padding-top: 10px;
+}

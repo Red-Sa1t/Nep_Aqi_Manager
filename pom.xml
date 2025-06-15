@@ -16,8 +16,13 @@
   <dependencies>
     <dependency>
       <groupId>io.github.palexdev</groupId>
+      <artifactId>virtualizedfx</artifactId>
+      <version>11.9.6</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.palexdev</groupId>
       <artifactId>materialfx</artifactId>
-      <version>11.13.5</version>
+      <version>11.16.0</version>
     </dependency>
     <dependency>
       <groupId>io.github.palexdev</groupId>
