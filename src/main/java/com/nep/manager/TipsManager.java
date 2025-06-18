@@ -7,6 +7,7 @@ import io.github.palexdev.materialfx.dialogs.MFXStageDialog;
 import io.github.palexdev.materialfx.enums.ScrimPriority;
 import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -40,10 +41,14 @@ public class TipsManager {
     }
 
     private void showDialog(String title, String message, String iconName) {
-        VBox vbox = new VBox(15);
-        vbox.setPadding(new Insets(20));
+        VBox vbox = new VBox(20);
+        vbox.setPadding(new Insets(30));
+        vbox.setAlignment(Pos.CENTER);
 
         Label label = new Label(message);
+        label.setWrapText(true);
+        label.setStyle("-fx-font-size: 16px;");
+        label.setAlignment(Pos.CENTER);
         MFXButton confirmBtn = new MFXButton("确定");
         confirmBtn.setStyle("""
                 -fx-background-color: -mfx-purple;
@@ -52,14 +57,14 @@ public class TipsManager {
         confirmBtn.setPrefWidth(80);
 
         StackPane content = new StackPane();
-        content.setPadding(new Insets(10));
+        content.setPadding(new Insets(15));
         content.getChildren().add(vbox);
 
         vbox.getChildren().addAll(label, confirmBtn);
 
         MFXGenericDialog dialogContent = MFXGenericDialogBuilder.build()
                 .setHeaderText(title)
-                .setHeaderIcon(new MFXFontIcon(iconName, 18))
+                .setHeaderIcon(new MFXFontIcon(iconName, 22))
                 .setContent(content)
                 .setShowClose(false)
                 .get();
@@ -81,14 +86,14 @@ public class TipsManager {
     }
 
     public void showInfo(String message) {
-        showDialog("提示", message, "fas-info-circle");
+        showDialog("提示", message, "fas-circle-check");
     }
 
     public void showWarning(String message) {
-        showDialog("警告", message, "fas-exclamation-triangle");
+        showDialog("警告", message, "fas-circle-exclamation");
     }
 
     public void showError(String message) {
-        showDialog("错误", message, "fas-times-circle");
+        showDialog("错误", message, "fas-circle-xmark");
     }
 }

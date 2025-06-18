@@ -1,42 +1,44 @@
 package com.nep.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nep.po.AqiFeedback;
 import com.nep.po.Supervisor;
+import io.github.palexdev.materialfx.controls.MFXTableColumn;
+import io.github.palexdev.materialfx.controls.MFXTableView;
+import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.materialfx.filter.IntegerFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import static com.nep.controller.NepmConfirmInfoViewController.classLoader;
-import static com.nep.controller.NepmConfirmInfoViewController.objectMapper;
+import java.util.stream.Collectors;
 
 public class NepsFeedbackViewController implements Initializable {
-    @FXML
-    private TableView<AqiFeedback> txt_tableView;
+
+    public static final ClassLoader classLoader = NepsFeedbackViewController.class.getClassLoader();
+
     @FXML
     private Label txt_realName;
-    //主舞台
-    public static Stage primaryStage;
-    //当前登录成功的公众监督员用户身份
+    public static final ObjectMapper objectMapper = new ObjectMapper();
+    // 主舞台和用户对象（需在主程序中赋值）
     public static Supervisor supervisor;
+    @FXML
+    private MFXTableView<AqiFeedback> txt_tableView;
 
-    public TableView<AqiFeedback> getTxt_tableView() {
+    public MFXTableView<AqiFeedback> getTxt_tableView() {
         return txt_tableView;
     }
 
-    public void setTxt_tableView(TableView<AqiFeedback> txt_tableView) {
+    public void setTxt_tableView(MFXTableView<AqiFeedback> txt_tableView) {
         this.txt_tableView = txt_tableView;
     }
 
@@ -50,57 +52,65 @@ public class NepsFeedbackViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //初始化当前用户名
+        // 初始化用户姓名显示
         txt_realName.setText(supervisor.getRealName());
 
-        //初始化table 数据表
-        TableColumn<AqiFeedback, Integer> afIdColumn = new TableColumn<>("编号");
-        afIdColumn.setMinWidth(40);
-        afIdColumn.setStyle("-fx-alignment: center;");	//居中
-        afIdColumn.setCellValueFactory(new PropertyValueFactory<>("afId"));
+        // 表格列定义与工厂绑定
+        MFXTableColumn<AqiFeedback> afIdColumn = new MFXTableColumn<>("编号", true, Comparator.comparing(AqiFeedback::getAfId));
+        afIdColumn.setRowCellFactory(item -> new MFXTableRowCell<>(AqiFeedback::getAfId));
+        afIdColumn.setAlignment(Pos.CENTER);
 
-        TableColumn<AqiFeedback, String> proviceNameColumn = new TableColumn<>("省区域");
-        proviceNameColumn.setMinWidth(60);
-        proviceNameColumn.setStyle("-fx-alignment: center;");	//居中
-        proviceNameColumn.setCellValueFactory(new PropertyValueFactory<>("proviceName"));
+        MFXTableColumn<AqiFeedback> proviceNameColumn = new MFXTableColumn<>("省区域", Comparator.comparing(AqiFeedback::getProviceName));
+        proviceNameColumn.setRowCellFactory(item -> new MFXTableRowCell<>(AqiFeedback::getProviceName));
+        proviceNameColumn.setAlignment(Pos.CENTER);
 
-        TableColumn<AqiFeedback, String> cityNameColumn = new TableColumn<>("市区域");
-        cityNameColumn.setMinWidth(60);
-        cityNameColumn.setStyle("-fx-alignment: center;");	//居中
-        cityNameColumn.setCellValueFactory(new PropertyValueFactory<>("cityName"));
+        MFXTableColumn<AqiFeedback> cityNameColumn = new MFXTableColumn<>("市区域", Comparator.comparing(AqiFeedback::getCityName));
+        cityNameColumn.setRowCellFactory(item -> new MFXTableRowCell<>(AqiFeedback::getCityName));
+        cityNameColumn.setAlignment(Pos.CENTER);
 
-        TableColumn<AqiFeedback, String> estimateGradeColumn = new TableColumn<>("预估等级");
-        estimateGradeColumn.setMinWidth(60);
-        estimateGradeColumn.setStyle("-fx-alignment: center;");	//居中
-        estimateGradeColumn.setCellValueFactory(new PropertyValueFactory<>("estimateGrade"));
+        MFXTableColumn<AqiFeedback> estimateGradeColumn = new MFXTableColumn<>("预估等级", Comparator.comparing(AqiFeedback::getEstimateGrade));
+        estimateGradeColumn.setRowCellFactory(item -> new MFXTableRowCell<>(AqiFeedback::getEstimateGrade));
+        estimateGradeColumn.setAlignment(Pos.CENTER);
 
-        TableColumn<AqiFeedback, String> dateColumn = new TableColumn<>("反馈时间");
-        dateColumn.setMinWidth(80);
-        dateColumn.setStyle("-fx-alignment: center;");	//居中
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        MFXTableColumn<AqiFeedback> dateColumn = new MFXTableColumn<>("反馈时间", Comparator.comparing(AqiFeedback::getDate));
+        dateColumn.setRowCellFactory(item -> new MFXTableRowCell<>(AqiFeedback::getDate));
+        dateColumn.setAlignment(Pos.CENTER);
 
-        TableColumn<AqiFeedback, String> infoColumn = new TableColumn<>("反馈信息");
-        infoColumn.setMinWidth(330);
-        infoColumn.setCellValueFactory(new PropertyValueFactory<>("infomation"));
+        MFXTableColumn<AqiFeedback> infoColumn = new MFXTableColumn<>("反馈信息", Comparator.comparing(AqiFeedback::getInfomation));
+        infoColumn.setRowCellFactory(item -> new MFXTableRowCell<>(AqiFeedback::getInfomation));
+        infoColumn.setAlignment(Pos.CENTER_LEFT);
 
-        txt_tableView.getColumns().addAll(afIdColumn, proviceNameColumn,cityNameColumn,estimateGradeColumn,dateColumn,infoColumn);
+        // 添加列到表格
+        txt_tableView.getTableColumns().addAll(
+                afIdColumn,
+                proviceNameColumn,
+                cityNameColumn,
+                estimateGradeColumn,
+                dateColumn,
+                infoColumn
+        );
+
+        // 过滤器
+        txt_tableView.getFilters().addAll(
+                new IntegerFilter<>("编号", AqiFeedback::getAfId)
+        );
+
+        // 加载数据（仅加载当前用户反馈）
         ObservableList<AqiFeedback> data = FXCollections.observableArrayList();
-        List<AqiFeedback> afList = new ArrayList<>();
-        try {
-            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json");
-            afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
+        try (InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json")) {
+            List<AqiFeedback> afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
             });
 
-            for (int i = afList.size() - 1; i >= 0; i--) {            //按照时间排序,有近到远
-                AqiFeedback afb = afList.get(i);
-                if (afb.getAfName().equals(supervisor.getRealName())) {
-                    data.add(afb);
-                }
-            }
+            List<AqiFeedback> userFeedback = afList.stream()
+                    .filter(af -> af.getAfName().equals(supervisor.getRealName()))
+                    .sorted((a, b) -> b.getDate().compareTo(a.getDate())) // 时间倒序
+                    .collect(Collectors.toList());
+
+            data.addAll(userFeedback);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         txt_tableView.setItems(data);
     }
 }
-

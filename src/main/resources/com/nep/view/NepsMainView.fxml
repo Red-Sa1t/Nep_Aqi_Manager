@@ -23,12 +23,15 @@
         <padding>
             <Insets bottom="10.0" left="10.0" top="60.0"/>
         </padding>
-        <Label graphicTextGap="15.0" styleClass="header" text="LOGIN">
+        <Label graphicTextGap="15.0" styleClass="header" text="东软环保公众监督系统"
+               alignment="CENTER"
+               style="-fx-font-family: 'Source Han Sans SC'; -fx-font-weight: bold; -fx-font-size: 18px;"/>
+        <Label graphicTextGap="15.0" styleClass="header" text="SUPERVISOR">
             <graphic>
                 <StackPane fx:id="logoContainer"/>
             </graphic>
         </Label>
-        <Label styleClass="menu-label" text="Components">
+        <Label styleClass="menu-label" text="菜单">
             <VBox.margin>
                 <Insets left="5.0" top="40.0"/>
             </VBox.margin>

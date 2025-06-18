@@ -6,19 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<VBox xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.nep.controller.NepsReportDetailViewController"
-      spacing="20"
-      alignment="TOP_CENTER"
-      stylesheets="@../css/Buttons.css,@../css/TextFields.css"
-      prefWidth="600.0" prefHeight="480.0">
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_CENTER" prefHeight="480.0" prefWidth="600.0"
+      spacing="20" stylesheets="@../css/Buttons.css,@../css/TextFields.css"
+      xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.NepsReportDetailViewController">
 
     <padding>
-        <Insets top="40" right="80" bottom="40" left="80"/>
+        <Insets bottom="40" left="80" right="80" top="40"/>
     </padding>
 
-    <Label text="报告详情编辑"
-           styleClass="login-title" alignment="CENTER">
+    <Label alignment="CENTER" styleClass="login-title" text="报告详情编辑">
         <font>
             <Font name="Microsoft YaHei UI" size="24"/>
         </font>
@@ -37,24 +33,25 @@
             <RowConstraints minHeight="120"/>
         </rowConstraints>
 
-        <Label text="关联反馈ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER_RIGHT"/>
-        <MFXTextField fx:id="afIdField" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="请输入反馈ID"/>
+        <Label alignment="CENTER_RIGHT" text="关联反馈ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <MFXTextField fx:id="afIdField" promptText="请输入反馈ID" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-        <Label text="污染原因分析:" GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="TOP_RIGHT"/>
-        <TextArea fx:id="pollutionCauseArea" GridPane.columnIndex="1" GridPane.rowIndex="1" prefRowCount="4"
-                  promptText="填写污染原因分析"/>
+        <Label alignment="TOP_RIGHT" text="污染原因分析:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextArea fx:id="pollutionCauseArea" prefRowCount="4" promptText="填写污染原因分析" GridPane.columnIndex="1"
+                  GridPane.rowIndex="1"/>
 
-        <Label text="近期解决方案:" GridPane.columnIndex="0" GridPane.rowIndex="2" alignment="TOP_RIGHT"/>
-        <TextArea fx:id="shortTermSolutionArea" GridPane.columnIndex="1" GridPane.rowIndex="2" prefRowCount="4"
-                  promptText="填写近期解决方案"/>
+        <Label alignment="TOP_RIGHT" text="近期解决方案:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextArea fx:id="shortTermSolutionArea" prefRowCount="4" promptText="填写近期解决方案" GridPane.columnIndex="1"
+                  GridPane.rowIndex="2"/>
 
-        <Label text="长期解决方案:" GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="TOP_RIGHT"/>
-        <TextArea fx:id="longTermSolutionArea" GridPane.columnIndex="1" GridPane.rowIndex="3" prefRowCount="4"
-                  promptText="填写长期解决方案"/>
+        <Label alignment="TOP_RIGHT" text="长期解决方案:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextArea fx:id="longTermSolutionArea" prefRowCount="4" promptText="填写长期解决方案" GridPane.columnIndex="1"
+                  GridPane.rowIndex="3"/>
     </GridPane>
 
-    <HBox spacing="20" alignment="CENTER_RIGHT" prefWidth="1">
-        <MFXButton id="custom" text="保存" onAction="#saveReport" styleClass="button-primary"/>
+    <HBox alignment="CENTER_RIGHT" prefHeight="41.0" prefWidth="440.0" spacing="20">
+        <MFXButton id="custom" onAction="#saveReport" prefHeight="46.0" prefWidth="79.0" styleClass="button-primary"
+                   text="保存"/>
     </HBox>
 
 </VBox>

@@ -1,49 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.nep.controller.NepsSelectAqiViewController">
-   <children>
-      <Label layoutX="215.0" layoutY="14.0" text="公众监督员信息反馈">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="900.0"
+           stylesheets="@../css/Buttons.css,@../css/TextFields.css" xmlns="http://javafx.com/javafx/17.0.12"
+           fx:controller="com.nep.controller.NepsSelectAqiViewController">
 
-      </Label>
+    <HBox alignment="CENTER" spacing="40.0">
 
-      <TableView fx:id="txt_tableView" layoutX="63.0" layoutY="59.0" prefHeight="170" prefWidth="587.0">
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="20"/>
+        </padding>
+        <!-- 左边输入区域 -->
+        <StackPane styleClass="grid-background">
+            <VBox spacing="15.0">
+                <padding>
+                    <Insets bottom="20" left="20" right="20" top="20"/>
+                </padding>
+                <Label alignment="CENTER" styleClass="login-title" text="公众监督员信息反馈">
+                    <font>
+                        <Font name="Microsoft YaHei UI" size="22.0"/>
+                    </font>
+                </Label>
 
-      </TableView>
+                <Label styleClass="section-title" text="反馈详细信息"/>
 
-      <Label layoutX="64.0" layoutY="243.0" text="反馈详细信息">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="所在省:"/>
+                    <MFXComboBox fx:id="txt_province" prefWidth="150.0"/>
+                </HBox>
 
-      </Label>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="所在市:"/>
+                    <MFXComboBox fx:id="txt_city" prefWidth="150.0"/>
+                </HBox>
 
-      <Label layoutX="103.0" layoutY="274.0" text="所在省:" />
-      <Label layoutX="396.0" layoutY="274.0" text="所在市:" />
-      <ComboBox fx:id="txt_province" layoutX="212.0" layoutY="270.0" prefHeight="23.0" prefWidth="130.0" />
-      <ComboBox fx:id="txt_city" layoutX="467.0" layoutY="270.0" prefHeight="23.0" prefWidth="130.0" />
-      <Label layoutX="103.0" layoutY="310.0" text="具体地址:" />
-      <TextField fx:id="txt_address" layoutX="212.0" layoutY="307.0" prefHeight="23.0" prefWidth="387.0" />
-      <Label layoutX="103.0" layoutY="344.0" text="预估AQI等级:" />
-      <ComboBox fx:id="txt_level" layoutX="213.0" layoutY="341.0" prefHeight="23.0" prefWidth="130.0" />
-      <Label layoutX="103.0" layoutY="376.0" text="请填写反馈信息:" />
-      <TextArea fx:id="txt_information" layoutX="213.0" layoutY="376.0" prefHeight="62.0" prefWidth="387.0" />
-      <Button layoutX="411.0" layoutY="451.0" mnemonicParsing="false" onAction="#saveFeedBack" prefHeight="29.0" prefWidth="114.0" text="提交反馈数据">
-         <font>
-            <Font size="14.0" />
-         </font>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="具体地址:"/>
+                    <MFXTextField fx:id="txt_address" prefWidth="150.0"/>
+                </HBox>
 
-      </Button>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="预估AQI等级:"/>
+                    <MFXComboBox fx:id="txt_level" prefWidth="150.0"/>
+                </HBox>
 
-      <Label layoutX="514.0" layoutY="41.0" text="公众监督员:" />
-      <Label fx:id="label_realName" layoutX="586.0" layoutY="41.0" prefHeight="15.0" prefWidth="63.0" />
-   </children>
+                <Label text="请填写反馈信息:"/>
+                <TextArea fx:id="txt_information" prefHeight="100.0" wrapText="true"/>
 
-</AnchorPane>
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <Label text="公众监督员:"/>
+                    <Label fx:id="label_realName" prefWidth="80.0"/>
+                </HBox>
+
+                <MFXButton onAction="#saveFeedBack" prefHeight="40.0" prefWidth="140.0" styleClass="button-primary"
+                           text="提交反馈数据"/>
+            </VBox>
+        </StackPane>
+
+        <!-- 右边 AQI 表格区域 -->
+        <StackPane styleClass="grid-background">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20"/>
+            </padding>
+            <VBox spacing="10.0">
+                <Label styleClass="section-title" text="AQI 等级信息表"/>
+                <MFXTableView fx:id="txt_tableView" prefHeight="500.0" prefWidth="500.0"/>
+            </VBox>
+        </StackPane>
+
+    </HBox>
+</StackPane>

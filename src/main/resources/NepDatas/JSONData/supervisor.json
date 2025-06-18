@@ -22,5 +22,17 @@
     "password": "1",
     "realName": "1",
     "sex": "女"
+  },
+  {
+    "loginCode": "19111111111",
+    "password": "123",
+    "realName": "雷小龙",
+    "sex": "女"
+  },
+  {
+    "loginCode": "19900000000",
+    "password": "00909",
+    "realName": "小龙",
+    "sex": "女"
   }
 ]

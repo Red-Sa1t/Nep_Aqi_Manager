@@ -20,6 +20,9 @@
     </HBox>
     <VBox layoutX="227.0" layoutY="51.0" prefWidth="250.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0"
           AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Label graphicTextGap="15.0" styleClass="header" text="东软环保公众监督系统"
+               alignment="CENTER"
+               style="-fx-font-family: 'Source Han Sans SC'; -fx-font-weight: bold; -fx-font-size: 18px;"/>
         <padding>
             <Insets bottom="10.0" left="10.0" top="60.0"/>
         </padding>
@@ -28,7 +31,7 @@
                 <StackPane fx:id="logoContainer"/>
             </graphic>
         </Label>
-        <Label styleClass="menu-label" text="Components">
+        <Label styleClass="menu-label" text="菜单">
             <VBox.margin>
                 <Insets left="5.0" top="40.0"/>
             </VBox.margin>

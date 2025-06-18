@@ -1,26 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
-            fx:controller="com.nep.controller.NepsFeedbackViewController">
-    <children>
-        <TableView fx:id="txt_tableView" layoutX="22.0" layoutY="68.0" prefHeight="340.0" prefWidth="650.0">
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           xmlns="http://javafx.com/javafx/17.0.12"
+           fx:controller="com.nep.controller.NepsFeedbackViewController"
+           prefHeight="500.0" prefWidth="700.0"
+           stylesheets="@../css/Buttons.css,@../css/TextFields.css">
 
-        </TableView>
+    <GridPane alignment="CENTER">
+        <!-- Padding -->
+        <padding>
+            <Insets top="60.0" right="80.0" bottom="60.0" left="80.0"/>
+        </padding>
 
-        <Label layoutX="207.0" layoutY="23.0" text="历史反馈预估AQI信息列表">
+        <!-- Column Constraints -->
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+        </columnConstraints>
+
+        <!-- Row Constraints -->
+        <rowConstraints>
+            <RowConstraints prefHeight="60.0" vgrow="NEVER"/>   <!-- Title -->
+            <RowConstraints vgrow="ALWAYS"/>                   <!-- Table -->
+            <RowConstraints prefHeight="30.0" vgrow="NEVER"/>  <!-- User Info -->
+        </rowConstraints>
+
+        <!-- 背景容器（圆角矩形） -->
+        <StackPane styleClass="grid-background" GridPane.rowSpan="2147483647">
+            <GridPane.margin>
+                <Insets top="-50.0" right="-50.0" bottom="-50.0" left="-50.0"/>
+            </GridPane.margin>
+        </StackPane>
+
+        <!-- 标题 -->
+        <Label text="历史反馈预估AQI信息列表" styleClass="login-title" alignment="CENTER"
+               GridPane.rowIndex="0">
             <font>
-                <Font name="System Bold" size="24.0" />
+                <Font name="Microsoft YaHei UI" size="24.0"/>
             </font>
-
         </Label>
 
-        <Label layoutX="537.0" layoutY="48.0" text="当前用户:" />
-        <Label fx:id="txt_realName" layoutX="598.0" layoutY="48.0" prefHeight="15.0" prefWidth="75.0" />
-    </children>
+        <MFXTableView fx:id="txt_tableView" prefHeight="340.0" prefWidth="600.0"
+                      GridPane.rowIndex="1"/>
 
-</AnchorPane>
+        <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.rowIndex="2">
+            <Label text="当前用户:"/>
+            <Label fx:id="txt_realName" prefHeight="15.0" prefWidth="75.0"/>
+        </HBox>
+    </GridPane>
+</StackPane>
