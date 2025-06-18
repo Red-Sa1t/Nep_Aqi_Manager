@@ -3,83 +3,107 @@
 <?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="540" prefWidth="720"
+            style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/17.0.12"
+            fx:controller="com.nep.controller.NepgAqiConfirmViewController">
 
-<AnchorPane prefHeight="540" prefWidth="720" style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nep.controller.NepgAqiConfirmViewController">
+    <VBox spacing="20" AnchorPane.leftAnchor="15" AnchorPane.rightAnchor="15" AnchorPane.topAnchor="15">
+        <!-- 标题 -->
+        <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #3F51B5;" text="AQI反馈数据实测信息"/>
 
-    <children>
-        <VBox spacing="20" AnchorPane.leftAnchor="15" AnchorPane.rightAnchor="15" AnchorPane.topAnchor="15">
-            <!-- 标题 -->
-            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #3F51B5;" text="AQI反馈数据实测信息" />
+        <!-- 表格 -->
+        <TableView fx:id="txt_tableView" prefHeight="220"
+                   style="-fx-background-color: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(63,81,181,0.2), 10, 0, 0, 2);"/>
 
-            <!-- 表格 -->
-            <TableView fx:id="txt_tableView" prefHeight="220" style="-fx-background-color: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(63,81,181,0.2), 10, 0, 0, 2);" />
+        <!-- 输入面板 -->
+        <VBox spacing="15"
+              style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);">
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #3F51B5;" text="AQI实测数据信息"/>
 
-            <!-- 输入面板 -->
-            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);">
-                <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #3F51B5;" text="AQI实测数据信息" />
+            <GridPane hgap="15" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" minWidth="140"/>
+                    <ColumnConstraints minWidth="200"/>
+                    <ColumnConstraints minWidth="80"/>
+                    <ColumnConstraints minWidth="100"/>
+                    <ColumnConstraints minWidth="100"/>
+                </columnConstraints>
 
-                <GridPane hgap="15" vgap="15">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" minWidth="140" />
-                        <ColumnConstraints minWidth="200" />
-                        <ColumnConstraints minWidth="80" />
-                        <ColumnConstraints minWidth="100" />
-                        <ColumnConstraints minWidth="100" />
-                    </columnConstraints>
+                <!-- AQI反馈数据编号 -->
+                <Label style="-fx-font-weight: 600;" text="AQI反馈数据编号:" GridPane.columnIndex="0"
+                       GridPane.rowIndex="0"/>
+                <MFXTextField fx:id="txt_afId" promptText="输入编号" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-                    <!-- AQI反馈数据编号 -->
-                    <Label style="-fx-font-weight: 600;" text="AQI反馈数据编号:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <MFXTextField fx:id="txt_afId" promptText="输入编号" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <!-- 网格员显示 -->
+                <Label style="-fx-font-weight: 600;" text="网格员:" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                <Label fx:id="label_realName" style="-fx-text-fill: #616161;" GridPane.columnIndex="4"
+                       GridPane.rowIndex="0"/>
 
-                    <!-- 网格员显示 -->
-                    <Label style="-fx-font-weight: 600;" text="网格员:" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-                    <Label fx:id="label_realName" style="-fx-text-fill: #616161;" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                <!-- SO2 -->
+                <Label style="-fx-font-weight: 600;" text="二氧化硫 (SO2) 浓度:" GridPane.columnIndex="0"
+                       GridPane.rowIndex="1"/>
+                <MFXTextField fx:id="txt_so2" maxWidth="150" promptText="μg/m³" GridPane.columnIndex="1"
+                              GridPane.rowIndex="1"/>
+                <Label style="-fx-text-fill: #757575;" text="μg/m³" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Label style="-fx-font-weight: 600;" text="浓度等级:" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                <Label fx:id="label_so2level" style="-fx-font-weight: bold; -fx-text-fill: #3F51B5;"
+                       GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+                <Label fx:id="label_so2explain"
+                       style="-fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;"
+                       GridPane.columnIndex="4" GridPane.rowIndex="2"/>
 
-                    <!-- SO2 -->
-                    <Label style="-fx-font-weight: 600;" text="二氧化硫 (SO2) 浓度:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <MFXTextField fx:id="txt_so2" maxWidth="150" promptText="μg/m³" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Label style="-fx-text-fill: #757575;" text="μg/m³" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                    <Label style="-fx-font-weight: 600;" text="浓度等级:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                    <Label fx:id="label_so2level" style="-fx-font-weight: bold; -fx-text-fill: #3F51B5;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                    <Label fx:id="label_so2explain" style="-fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                <!-- CO -->
+                <Label style="-fx-font-weight: 600;" text="一氧化碳 (CO) 浓度:" GridPane.columnIndex="0"
+                       GridPane.rowIndex="3"/>
+                <MFXTextField fx:id="txt_co" maxWidth="150" promptText="μg/m³" GridPane.columnIndex="1"
+                              GridPane.rowIndex="3"/>
+                <Label style="-fx-text-fill: #757575;" text="μg/m³" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                <Label style="-fx-font-weight: 600;" text="浓度等级:" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                <Label fx:id="label_colevel" style="-fx-font-weight: bold; -fx-text-fill: #3F51B5;"
+                       GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+                <Label fx:id="label_coexplain"
+                       style="-fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;"
+                       GridPane.columnIndex="4" GridPane.rowIndex="4"/>
 
-                    <!-- CO -->
-                    <Label style="-fx-font-weight: 600;" text="一氧化碳 (CO) 浓度:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <MFXTextField fx:id="txt_co" maxWidth="150" promptText="μg/m³" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                    <Label style="-fx-text-fill: #757575;" text="μg/m³" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                    <Label style="-fx-font-weight: 600;" text="浓度等级:" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                    <Label fx:id="label_colevel" style="-fx-font-weight: bold; -fx-text-fill: #3F51B5;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                    <Label fx:id="label_coexplain" style="-fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                <!-- PM2.5 -->
+                <Label style="-fx-font-weight: 600;" text="细颗粒物 (PM2.5) 浓度:" GridPane.columnIndex="0"
+                       GridPane.rowIndex="5"/>
+                <MFXTextField fx:id="txt_pm" maxWidth="150" promptText="μg/m³" GridPane.columnIndex="1"
+                              GridPane.rowIndex="5"/>
+                <Label style="-fx-text-fill: #757575;" text="μg/m³" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                <Label style="-fx-font-weight: 600;" text="浓度等级:" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+                <Label fx:id="label_pmlevel" style="-fx-font-weight: bold; -fx-text-fill: #3F51B5;"
+                       GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+                <Label fx:id="label_pmexplain"
+                       style="-fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;"
+                       GridPane.columnIndex="4" GridPane.rowIndex="6"/>
 
-                    <!-- PM2.5 -->
-                    <Label style="-fx-font-weight: 600;" text="细颗粒物 (PM2.5) 浓度:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                    <MFXTextField fx:id="txt_pm" maxWidth="150" promptText="μg/m³" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                    <Label style="-fx-text-fill: #757575;" text="μg/m³" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                    <Label style="-fx-font-weight: 600;" text="浓度等级:" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                    <Label fx:id="label_pmlevel" style="-fx-font-weight: bold; -fx-text-fill: #3F51B5;" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                    <Label fx:id="label_pmexplain" style="-fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                <!-- 实测AQI最终等级 -->
+                <Label style="-fx-font-weight: 600;" text="实测AQI最终等级:" GridPane.columnIndex="0"
+                       GridPane.rowIndex="7"/>
+                <Label fx:id="label_confirmlevel" style="-fx-font-weight: bold; -fx-text-fill: #3F51B5;"
+                       GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                <Label fx:id="label_confirmexplain"
+                       style="-fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;"
+                       GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7"/>
+                <rowConstraints>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                </rowConstraints>
+            </GridPane>
 
-                    <!-- 实测AQI最终等级 -->
-                    <Label style="-fx-font-weight: 600;" text="实测AQI最终等级:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-                    <Label fx:id="label_confirmlevel" style="-fx-font-weight: bold; -fx-text-fill: #3F51B5;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                    <Label fx:id="label_confirmexplain" style="-fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
-               <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-               </rowConstraints>
-                </GridPane>
-
-                <!-- 提交按钮 -->
-                <HBox alignment="CENTER_RIGHT">
-                    <MFXButton onAction="#confirmData" prefHeight="43.0" prefWidth="89.0" style="-fx-font-weight: bold; -fx-background-color: #3F51B5; -fx-text-fill: white; -fx-background-radius: 8;" text="提交数据" />
-                </HBox>
-            </VBox>
+            <!-- 提交按钮 -->
+            <HBox alignment="CENTER_RIGHT">
+                <MFXButton onAction="#confirmData" prefHeight="43.0" prefWidth="89.0"
+                           style="-fx-font-weight: bold; -fx-background-color: #3F51B5; -fx-text-fill: white; -fx-background-radius: 8;"
+                           text="提交数据"/>
+            </HBox>
         </VBox>
-    </children>
+    </VBox>
 </AnchorPane>

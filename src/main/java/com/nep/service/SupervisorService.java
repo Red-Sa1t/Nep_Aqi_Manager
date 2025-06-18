@@ -1,6 +1,6 @@
 package com.nep.service;
 
-import com.nep.entity.Supervisor;
+import com.nep.po.Supervisor;
 
 //import com.nep.po.Supervisor;
 

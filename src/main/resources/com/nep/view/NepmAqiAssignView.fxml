@@ -3,95 +3,130 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
-            prefWidth="650.0" stylesheets="@../css/ChecksRadiosToggles.css"
-            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.NepmAqiAssignViewController">
-    <!-- Header Label -->
-    <Label layoutX="182.0" layoutY="24.0" styleClass="header-label" text="公众监督AQI反馈数据指派">
-        <font>
-            <Font name="System Bold" size="24.0"/>
-        </font>
-    </Label>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" style="-fx-background-color: transparent;"
+           xmlns="http://javafx.com/javafx/17.0.12"
+           fx:controller="com.nep.controller.NepmAqiAssignViewController"> <!-- 可选透明背景 -->
 
-    <!-- First Panel (Input AQI ID) -->
-    <Pane fx:id="txt_pane1" layoutX="30.0" layoutY="75.0" prefHeight="56.0" prefWidth="590.0">
-        <StackPane prefHeight="56.0" prefWidth="590.0" styleClass="grid-background"/>
+    <!-- 背景圆角矩形 -->
+    <Region maxHeight="600" maxWidth="700"
+            style="-fx-background-color: white; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.2, 0, 4);"/>
 
-        <Label layoutX="14.0" layoutY="19.0" styleClass="sub-header-label" text="请输入AQI反馈数据编号:">
+    <!-- 内容主GridPane -->
+    <GridPane alignment="CENTER" hgap="20" prefHeight="500" prefWidth="650" style="-fx-padding: 30;"
+              stylesheets="@../css/ChecksRadiosToggles.css,@../css/TextFields.css,@../css/Buttons.css" vgap="20">
+
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="280" minWidth="250" prefWidth="250"/>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="280" minWidth="250" prefWidth="250"/>
+        </columnConstraints>
+
+        <!-- 标题 -->
+        <Label alignment="CENTER" styleClass="login-title" text="公众监督AQI反馈数据指派" GridPane.columnSpan="2"
+               GridPane.rowIndex="0">
             <font>
-                <Font size="14.0"/>
+                <Font name="Microsoft YaHei UI" size="24"/>
             </font>
         </Label>
 
-        <MFXTextField fx:id="txt_afId" layoutX="179.0" layoutY="4.0" prefHeight="48.0" prefWidth="276.0"
-                      styleClass="custom-field"/>
-
-        <MFXButton buttonType="RAISED" layoutX="460.0" layoutY="10.0" minHeight="27.0" minWidth="70.0"
-                   onAction="#queryFeedback" prefHeight="38.0" prefWidth="90.0" styleClass="action-button"
-                   text="查询"/>
-    </Pane>
-
-    <!-- Second Panel (AQI Feedback Info) -->
-    <Pane fx:id="txt_pane2" layoutX="30.0" layoutY="140.0" prefHeight="170.0" prefWidth="590.0">
-        <StackPane prefHeight="170.0" prefWidth="590.0" styleClass="grid-background"/>
-
-        <Label layoutX="29.0" layoutY="13.0" styleClass="form-label" text="AQI反馈数据编号:"/>
-        <Label fx:id="label_afId" layoutX="150.0" layoutY="13.0" prefHeight="15.0" prefWidth="82.0"
-               styleClass="form-value"/>
-
-        <Label layoutX="29.0" layoutY="43.0" styleClass="form-label" text="所在省区域:"/>
-        <Label fx:id="label_proviceName" layoutX="150.0" layoutY="43.0" prefHeight="15.0" prefWidth="82.0"
-               styleClass="form-value"/>
-
-        <Label layoutX="320.0" layoutY="43.0" styleClass="form-label" text="所在市区域:"/>
-        <Label fx:id="label_cityName" layoutX="410.0" layoutY="43.0" prefHeight="15.0" prefWidth="82.0"
-               styleClass="form-value"/>
-
-        <Label layoutX="29.0" layoutY="73.0" prefHeight="15.0" prefWidth="56.0" styleClass="form-label"
-               text="详细地址:"/>
-        <Label fx:id="label_address" layoutX="150.0" layoutY="73.0" prefHeight="15.0" prefWidth="440.0"
-               styleClass="form-value"/>
-
-        <Label layoutX="29.0" layoutY="103.0" styleClass="form-label" text="预估AQI等级:"/>
-        <Label fx:id="label_estimateGrade" layoutX="150.0" layoutY="103.0" prefHeight="15.0" prefWidth="82.0"
-               styleClass="form-value"/>
-
-        <Label layoutX="320.0" layoutY="103.0" styleClass="form-label" text="反馈者姓名:"/>
-        <Label fx:id="label_afName" layoutX="410.0" layoutY="103.0" prefHeight="15.0" prefWidth="82.0"
-               styleClass="form-value"/>
-
-        <Label layoutX="29.0" layoutY="134.0" styleClass="form-label" text="反馈信息详情:"/>
-        <Label fx:id="label_infomation" layoutX="150.0" layoutY="134.0" prefHeight="19.0" prefWidth="440.0"
-               styleClass="form-value"/>
-
-        <Label layoutX="320.0" layoutY="13.0" styleClass="form-label" text="反馈日期:"/>
-        <Label fx:id="label_date" layoutX="410.0" layoutY="13.0" prefHeight="15.0" prefWidth="82.0"
-               styleClass="form-value"/>
-    </Pane>
-
-    <!-- Third Panel (Assign Grid Member) -->
-    <Pane fx:id="txt_pane3" layoutX="30.0" layoutY="328.0" prefHeight="91.0" prefWidth="590.0">
-        <StackPane prefHeight="91.0" prefWidth="590.0" styleClass="grid-background"/>
-
-        <Label layoutX="20.0" layoutY="6.0" styleClass="sub-header-label" text="公众监督AQI反馈数据任务指派:">
+        <!-- 输入 AQI 编号 -->
+        <Label text="请输入AQI反馈数据编号:" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <font>
-                <Font size="14.0"/>
+                <Font name="Microsoft YaHei UI" size="18"/>
             </font>
         </Label>
+        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <children>
+                <MFXTextField fx:id="txt_afId" minHeight="-Infinity" prefHeight="37.0" prefWidth="215.0"
+                              promptText="输入编号" styleClass="custom-field"/>
+                <MFXButton id="custom" buttonType="RAISED" onAction="#queryFeedback" prefHeight="48.0" prefWidth="78.0"
+                           styleClass="action-button" text="查询"/>
+            </children>
+        </HBox>
 
-        <Label layoutX="33.0" layoutY="46.0" styleClass="form-label" text="请选择您要指派的网格员:"/>
+        <!-- 反馈详情部分 -->
+        <TitledPane expanded="true"
+                    style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);"
+                    text="反馈信息详情" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <VBox spacing="10.0">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10"/>
+                </padding>
+                <GridPane hgap="15" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" minWidth="120"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                        <ColumnConstraints halignment="RIGHT" minWidth="120"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
 
-        <MFXComboBox fx:id="combo_realName" layoutX="194.0" layoutY="42.0" prefHeight="32.0" prefWidth="142.0"
-                     styleClass="custom-combo">
-            <font>
-                <Font name="Microsoft YaHei" size="12.0"/>
-            </font>
-        </MFXComboBox>
+                    <Label text="反馈编号:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label fx:id="label_afId" styleClass="form-value" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-        <MFXButton buttonType="RAISED" layoutX="425.0" layoutY="39.0" onAction="#assignGridMember" prefHeight="29.0"
-                   prefWidth="90.0" styleClass="action-button" text="立即指派"/>
-    </Pane>
-</AnchorPane>
+                    <Label text="反馈日期:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <Label fx:id="label_date" styleClass="form-value" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                    <Label text="省区域:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label fx:id="label_proviceName" styleClass="form-value" GridPane.columnIndex="1"
+                           GridPane.rowIndex="1"/>
+
+                    <Label text="市区域:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                    <Label fx:id="label_cityName" styleClass="form-value" GridPane.columnIndex="3"
+                           GridPane.rowIndex="1"/>
+
+                    <Label text="详细地址:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label fx:id="label_address" styleClass="form-value" wrapText="true" GridPane.columnIndex="1"
+                           GridPane.columnSpan="3" GridPane.rowIndex="2"/>
+
+                    <Label text="预估AQI等级:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <Label fx:id="label_estimateGrade" styleClass="form-value" GridPane.columnIndex="1"
+                           GridPane.rowIndex="3"/>
+
+                    <Label text="反馈者姓名:" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                    <Label fx:id="label_afName" styleClass="form-value" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
+                    <Label text="反馈信息详情:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                    <Label fx:id="label_infomation" styleClass="form-value" wrapText="true" GridPane.columnIndex="1"
+                           GridPane.columnSpan="3" GridPane.rowIndex="4"/>
+                    <rowConstraints>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                    </rowConstraints>
+                </GridPane>
+            </VBox>
+        </TitledPane>
+
+        <!-- 网格员指派 -->
+        <TitledPane expanded="true" prefHeight="63.0" prefWidth="651.0"
+                    style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);"
+                    text="任务指派" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <HBox spacing="20">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10"/>
+                </padding>
+                <Label prefHeight="32.0" prefWidth="231.0" styleClass="form-label" text="请选择要指派的网格员:">
+                    <font>
+                        <Font size="15.0"/>
+                    </font>
+                </Label>
+                <MFXComboBox fx:id="combo_realName" minHeight="-Infinity" prefHeight="34.0" prefWidth="200"
+                             promptText="选择网格员"/>
+                <MFXButton id="custom" buttonType="RAISED" onAction="#assignGridMember" prefHeight="33.0"
+                           prefWidth="64.0" styleClass="action-button" text="立即指派"/>
+            </HBox>
+        </TitledPane>
+
+        <rowConstraints>
+            <RowConstraints maxHeight="103.33332570393881" minHeight="39.0" prefHeight="83.66666666666666"/>
+            <RowConstraints maxHeight="59.0" minHeight="9.333340962727874" prefHeight="29.666666666666657"/>
+            <RowConstraints maxHeight="218.66666666666669" minHeight="0.0" prefHeight="173.66666666666669"/>
+            <RowConstraints maxHeight="400.0" minHeight="0.0" prefHeight="45.0"/>
+        </rowConstraints>
+    </GridPane>
+</StackPane>

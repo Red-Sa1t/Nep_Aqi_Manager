@@ -2,16 +2,16 @@ package com.nep.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.nep.dto.AqiLimitDto;
-import com.nep.entity.AqiFeedback;
-import com.nep.entity.GridMember;
+import com.nep.manager.TipsManager;
+import com.nep.po.AqiFeedback;
+import com.nep.po.AqiFinish;
+import com.nep.po.GridMember;
 import com.nep.service.AqiFeedbackService;
+import com.nep.service.AqiFinishService;
 import com.nep.service.impl.AqiFeedbackServiceImpl;
+import com.nep.service.impl.AqiFinishServiceImpl;
 import com.nep.util.CommonUtil;
-import com.nep.util.JavafxUtil;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -69,6 +69,7 @@ public class NepgAqiConfirmViewController implements Initializable {
 
     // 多态实现业务逻辑
     private AqiFeedbackService aqiFeedbackService = new AqiFeedbackServiceImpl();
+    private AqiFinishService aqiFinishService = new AqiFinishServiceImpl();
 
     private int so2level;
     private int colevel;
@@ -168,7 +169,7 @@ public class NepgAqiConfirmViewController implements Initializable {
                     }
                 }
                 if (flag) {
-                    JavafxUtil.showAlert(primaryStage, "数据错误", "AQI反馈数据编号有误", "请重新输入AQI反馈数据编号", "warn");
+                    TipsManager.getInstance().showError("AQI反馈数据编号有误");
                     txt_afId.setText("");
                 }
             }
@@ -253,16 +254,23 @@ public class NepgAqiConfirmViewController implements Initializable {
 
     private void updateConfirmLevel() {
         confirmDto = CommonUtil.confirmLevel(so2level, colevel, pmlevel);
-        label_confirmlevel.setText(confirmDto.getLevel());
-        label_confirmlevel.setStyle("-fx-text-fill:" + confirmDto.getColor() + ";");
-        label_confirmexplain.setText(confirmDto.getExplain());
-        label_confirmexplain.setStyle("-fx-background-color:" + confirmDto.getColor() + "; -fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;");
+        try {
+            label_confirmlevel.setText(confirmDto.getLevel());
+            label_confirmlevel.setStyle("-fx-text-fill:" + confirmDto.getColor() + ";");
+            label_confirmexplain.setText(confirmDto.getExplain());
+            label_confirmexplain.setStyle("-fx-background-color:" + confirmDto.getColor() + "; -fx-background-radius: 12; -fx-padding: 4 10; -fx-text-fill: white;");
+        } catch (Exception e) {
+            label_confirmlevel.setText("");
+            label_confirmlevel.setStyle("");
+            label_confirmexplain.setText("");
+            label_confirmexplain.setStyle("");
+        }
     }
 
     @FXML
     public void confirmData() {
         try {
-            AqiFeedback afb = new AqiFeedback();
+            AqiFinish afb = new AqiFinish();
             afb.setAfId(Integer.parseInt(txt_afId.getText()));
             afb.setState("已实测");
             afb.setSo2(Double.parseDouble(txt_so2.getText()));
@@ -272,18 +280,20 @@ public class NepgAqiConfirmViewController implements Initializable {
             afb.setConfirmLevel(confirmDto.getLevel());
             afb.setConfirmExplain(confirmDto.getExplain());
             afb.setGmName(gridMember.getRealName());
+            afb.setCo_level(colevel);
+            afb.setSo2_level(so2level);
+            afb.setPm_level(pmlevel);
 
-            aqiFeedbackService.confirmData(afb);
+            aqiFinishService.confirmData(afb);
 
-            JavafxUtil.showAlert(primaryStage, "提交成功", "污染物实测数据提交成功", "", "info");
-
+            TipsManager.getInstance().showInfo("污染物实测数据提交成功");
             // 刷新表格数据
             loadTableData();
 
             // 重置输入框和标签
             reset();
         } catch (Exception e) {
-            JavafxUtil.showAlert(primaryStage, "错误", "提交数据失败", e.getMessage(), "error");
+            TipsManager.getInstance().showError("提交数据失败");
         }
     }
 

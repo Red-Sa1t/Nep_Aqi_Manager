@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0"
             styleClass="rootPane"
-            stylesheets="@../css/Demo.css" xmlns="http://javafx.com/javafx/17"
+            stylesheets="@../css/Nepg.css" xmlns="http://javafx.com/javafx/17"
             fx:controller="com.nep.controller.NepgMainController">
     <HBox fx:id="windowHeader" alignment="CENTER_RIGHT" layoutY="6.0" prefHeight="50.0" prefWidth="1281.0"
           spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -23,12 +23,12 @@
         <padding>
             <Insets bottom="10.0" left="10.0" top="60.0"/>
         </padding>
-        <Label graphicTextGap="15.0" styleClass="header" text="LOGIN">
+        <Label graphicTextGap="15.0" styleClass="header" text="GRID_MEM">
             <graphic>
                 <StackPane fx:id="logoContainer"/>
             </graphic>
         </Label>
-        <Label styleClass="menu-label" text="Components">
+        <Label styleClass="menu-label">
             <VBox.margin>
                 <Insets left="5.0" top="40.0"/>
             </VBox.margin>
@@ -40,7 +40,7 @@
             <padding>
                 <Insets right="10.0"/>
             </padding>
-            <VBox fx:id="navBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0"
+            <VBox fx:id="navBar" maxHeight="1.8" maxWidth="1.8" spacing="5.0"
                   styleClass="navbar"/>
         </MFXScrollPane>
     </VBox>

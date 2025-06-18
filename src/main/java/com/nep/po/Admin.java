@@ -1,4 +1,4 @@
-package com.nep.entity;
+package com.nep.po;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

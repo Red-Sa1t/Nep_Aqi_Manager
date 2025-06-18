@@ -6,8 +6,8 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="436.0"
-          prefWidth="484.0" stylesheets="@../css/TextFields.css,@../css/Buttons.css"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="450.0"
+          prefWidth="450.0" stylesheets="@../css/TextFields.css,@../css/Buttons.css"
           xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.LoginController">
 
     <!-- Column Constraints -->
@@ -61,24 +61,19 @@
         <MFXRadioButton fx:id="rb_grid" text="网格员" toggleGroup="$roleToggleGroup"/>
     </HBox>
 
-    <!-- Username Input -->
     <MFXTextField fx:id="txt_id" floatMode="BORDER" floatingText="用户名" prefHeight="38.0" prefWidth="205.0"
-                  promptText="请输入用户名" styleClass="login-input" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                  promptText="请输入用户名" styleClass="login-input" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                  onKeyPressed="#handleEnterKey">
         <font>
             <Font name="Microsoft YaHei UI" size="12.0"/>
         </font>
     </MFXTextField>
 
-    <!-- Password Input -->
     <MFXPasswordField fx:id="txt_password" floatMode="BORDER" floatingText="密码" prefHeight="38.0" prefWidth="203.0"
-                      promptText="请输入密码" styleClass="login-input" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-
-
+                      promptText="请输入密码" styleClass="login-input" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                      onKeyPressed="#handleEnterKey"/>
     <!-- Login Button -->
     <MFXButton id="custom" buttonType="RAISED" onAction="#login" prefHeight="34.0" prefWidth="113.0" text="登录"
                GridPane.rowIndex="4"/>
 
-    <!-- Error Label -->
-    <Label fx:id="errorLabel" alignment="CENTER" styleClass="error-text" visible="false" GridPane.columnSpan="2"
-           GridPane.rowIndex="5"/>
 </GridPane>

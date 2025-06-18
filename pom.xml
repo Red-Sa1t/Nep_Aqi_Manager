@@ -20,6 +20,11 @@
       <version>11.9.6</version>
     </dependency>
     <dependency>
+      <groupId>org.controlsfx</groupId>
+      <artifactId>controlsfx</artifactId>
+      <version>11.2.0</version> <!-- 确保与你的 JavaFX 版本匹配 -->
+    </dependency>
+    <dependency>
       <groupId>io.github.palexdev</groupId>
       <artifactId>materialfx</artifactId>
       <version>11.16.0</version>

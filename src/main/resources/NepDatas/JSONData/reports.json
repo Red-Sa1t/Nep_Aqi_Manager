@@ -1,0 +1,20 @@
+[
+  {
+    "reportId": 1,
+    "afId": 101,
+    "pollutionCause": "工厂排放超标",
+    "shortTermSolution": "加强巡查并限期整改",
+    "longTermSolution": "推动工厂更新环保设施",
+    "createDate": "2025-06-17T10:30:00.000+08:00",
+    "creator": "张三"
+  },
+  {
+    "reportId": 2,
+    "afId": 102,
+    "pollutionCause": "建筑工地扬尘",
+    "shortTermSolution": "覆盖裸露土层，洒水抑尘",
+    "longTermSolution": "制定绿色施工标准",
+    "createDate": "2025-06-17T11:00:00.000+08:00",
+    "creator": "李四"
+  }
+]

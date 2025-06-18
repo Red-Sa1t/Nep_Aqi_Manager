@@ -2,16 +2,15 @@ package com.nep.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nep.NepsMain;
-import com.nep.entity.Aqi;
-import com.nep.entity.AqiFeedback;
-import com.nep.entity.ProvinceCity;
-import com.nep.entity.Supervisor;
 import com.nep.io.RWJsonTest;
+import com.nep.manager.TipsManager;
+import com.nep.po.Aqi;
+import com.nep.po.AqiFeedback;
+import com.nep.po.ProvinceCity;
+import com.nep.po.Supervisor;
 import com.nep.service.AqiFeedbackService;
 import com.nep.service.impl.AqiFeedbackServiceImpl;
 import com.nep.util.CommonUtil;
-import com.nep.util.JavafxUtil;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -125,7 +124,7 @@ public class NepsSelectAqiViewController implements Initializable {
         for(Aqi aqi:alist){
             txt_level.getItems().add(aqi.getLevel());
         }
-        txt_level.setValue("预估AQI等级");
+        txt_level.setValue("默认等级");
 
         List<ProvinceCity> plist = new ArrayList<>();
         try {
@@ -138,8 +137,8 @@ public class NepsSelectAqiViewController implements Initializable {
         for (ProvinceCity province : plist) {
             txt_province.getItems().add(province.getProvinceName());
         }
-        txt_province.setValue("请选择省区域");
-        txt_city.setValue("请选择市区域");
+        txt_province.setValue("默认省");
+        txt_city.setValue("默认市");
         List<ProvinceCity> finalPlist = plist;
         txt_province.valueProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -155,7 +154,7 @@ public class NepsSelectAqiViewController implements Initializable {
                 for(String cityName:clist){
                     txt_city.getItems().add(cityName);
                 }
-                txt_city.setValue("请选择市区域");
+                txt_city.setValue("默认市");
             }
 
         });
@@ -173,16 +172,9 @@ public class NepsSelectAqiViewController implements Initializable {
         afb.setInfomation(txt_information.getText());
         afb.setDate(CommonUtil.currentDate());
         afb.setState("未指派");
+        afb.setGmName("无");
         aqiFeedbackService.saveFeedBack(afb);
-        JavafxUtil.showAlert(primaryStage, "反馈信息成功", "您的预估AQI信息提交成功", "感谢您的反馈!","info");
-        NepsFeedbackViewController.primaryStage = primaryStage;
-        JavafxUtil.showStage(NepsMain.class,"view/NepsFeedbackView.fxml", primaryStage,"东软环保公众监督平台-公众监督员端-AQI反馈数据列表");
-
-    }
-
-    public void feedBackList(){
-        NepsFeedbackViewController.primaryStage = primaryStage;
-        JavafxUtil.showStage(NepsMain.class,"view/NepsFeedbackView.fxml", primaryStage,"东软环保公众监督平台-公众监督员端-AQI反馈数据列表");
+        TipsManager.getInstance().showInfo("信息反馈成功！");
     }
 
 }

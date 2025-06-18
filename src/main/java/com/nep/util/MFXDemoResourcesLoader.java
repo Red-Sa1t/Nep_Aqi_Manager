@@ -16,7 +16,7 @@
  * along with MaterialFX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.nep;
+package com.nep.util;
 
 import java.io.InputStream;
 import java.net.URL;

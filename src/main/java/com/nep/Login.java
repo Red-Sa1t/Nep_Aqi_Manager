@@ -19,6 +19,7 @@
 package com.nep;
 
 import com.nep.controller.InitController;
+import com.nep.util.MFXDemoResourcesLoader;
 import fr.brouillard.oss.cssfx.CSSFX;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
 import io.github.palexdev.materialfx.css.themes.Themes;
@@ -29,6 +30,8 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.util.Objects;
 
 public class Login extends Application {
 
@@ -50,6 +53,7 @@ public class Login extends Application {
 		Parent root = loader.load();
 
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/nep/css/Notifications.css")).toExternalForm());
 		MFXThemeManager.addOn(scene, Themes.DEFAULT);
 		scene.setFill(Color.TRANSPARENT);
 		primaryStage.initStyle(StageStyle.TRANSPARENT);

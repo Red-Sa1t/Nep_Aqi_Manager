@@ -1,14 +1,14 @@
 package com.nep.controller;
 
-import com.nep.MFXDemoResourcesLoader;
-import com.nep.entity.GridMember;
+import com.nep.manager.TipsManager;
+import com.nep.po.GridMember;
 import com.nep.service.AdminService;
 import com.nep.service.GridMemberService;
 import com.nep.service.SupervisorService;
 import com.nep.service.impl.AdminServiceImpl;
 import com.nep.service.impl.GridMemberServiceImpl;
 import com.nep.service.impl.SupervisorServiceImpl;
-import com.nep.util.JavafxUtil;
+import com.nep.util.MFXDemoResourcesLoader;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXRadioButton;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
@@ -18,6 +18,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -69,7 +71,7 @@ public class LoginController {
         String password = txt_password.getText().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showLoginError("请输入用户名和密码");
+            TipsManager.getInstance().showError("请输入用户名和密码");
             return;
         }
 
@@ -84,7 +86,7 @@ public class LoginController {
                 handleGridMemberLogin(username, password);
                 break;
             default:
-                showLoginError("请选择有效的登录角色");
+                TipsManager.getInstance().showError("请选择有效的登录角色");
         }
     }
 
@@ -98,7 +100,6 @@ public class LoginController {
             try {
                 FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/NepmMainView.fxml"));
                 Stage newStage = new Stage();
-                NepmLoginViewController.primaryStage = newStage;
                 loader.setControllerFactory(c -> new NepmMainController(newStage));
                 Parent root = loader.load();
 
@@ -115,7 +116,7 @@ public class LoginController {
                 e.printStackTrace();
             }
         } else {
-            showLoginError("管理员账号或密码错误");
+            TipsManager.getInstance().showError("管理员账号或密码错误");
         }
     }
 
@@ -128,7 +129,6 @@ public class LoginController {
             try {
                 FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/NepsMainView.fxml"));
                 Stage newStage = new Stage();
-                NepsLoginViewController.primaryStage = newStage;
                 loader.setControllerFactory(c -> new NepsMainController(newStage));
                 Parent root = loader.load();
 
@@ -145,13 +145,14 @@ public class LoginController {
                 e.printStackTrace();
             }
         } else {
-            showLoginError("监督员账号或密码错误");
+            TipsManager.getInstance().showError("监督员账号或密码错误");
         }
     }
 
     /**
      * 处理网格员登录
      */
+
     private void handleGridMemberLogin(String username, String password) {
         GridMember member = gridMemberService.login(username, password);
         if (member != null) {
@@ -161,7 +162,6 @@ public class LoginController {
             try {
                 FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/NepgMainView.fxml"));
                 Stage newStage = new Stage();
-                NepgLoginViewController.primaryStage = newStage;
                 loader.setControllerFactory(c -> new NepgMainController(newStage));
                 Parent root = loader.load();
 
@@ -178,7 +178,7 @@ public class LoginController {
                 e.printStackTrace();
             }
         } else {
-            showLoginError("网格员账号或密码错误");
+            TipsManager.getInstance().showError("网格员账号或密码错误");
         }
     }
 
@@ -196,11 +196,10 @@ public class LoginController {
         return "";
     }
 
-    /**
-     * 显示登录错误提示
-     */
-    private void showLoginError(String message) {
-        JavafxUtil.showAlert(primaryStage, "登录失败", message, "", "warn");
+    @FXML
+    private void handleEnterKey(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            login(); // 调用登录方法
+        }
     }
-
 }

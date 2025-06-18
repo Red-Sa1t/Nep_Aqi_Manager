@@ -3,9 +3,10 @@ package com.nep.service.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nep.controller.NepsFeedbackViewController;
+import com.nep.controller.NepsReportDetailViewController;
 import com.nep.controller.NepsSelectAqiViewController;
-import com.nep.entity.Supervisor;
 import com.nep.io.RWJsonTest;
+import com.nep.po.Supervisor;
 import com.nep.service.SupervisorService;
 
 import java.io.FileOutputStream;
@@ -35,8 +36,9 @@ public class SupervisorServiceImpl implements SupervisorService {
         boolean isLogin = false;
         for(Supervisor s:slist){
             if (s.getLoginCode().equals(loginCode) && s.getPassword().equals(password)) {
-                NepsSelectAqiViewController.supervisor = s;	//将当前登录成功用户身份共享给下一个界面
-                NepsFeedbackViewController.supervisor = s;	//将当前登录成功用户身份共享给下一个界面
+                NepsSelectAqiViewController.supervisor = s;
+                NepsFeedbackViewController.supervisor = s;
+                NepsReportDetailViewController.supervisor = s;
                 return true;
             }
         }

@@ -1,10 +1,8 @@
 package com.nep.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.nep.NepsMain;
-import com.nep.entity.AqiFeedback;
-import com.nep.entity.Supervisor;
-import com.nep.util.JavafxUtil;
+import com.nep.po.AqiFeedback;
+import com.nep.po.Supervisor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -50,14 +48,8 @@ public class NepsFeedbackViewController implements Initializable {
         this.txt_realName = txt_realName;
     }
 
-
-    public void back(){
-        JavafxUtil.showStage(NepsMain.class,"view/NepsSelectAqiView.fxml", primaryStage,"东软环保公众监督平台-公众监督员端-AQI数据反馈");
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
         //初始化当前用户名
         txt_realName.setText(supervisor.getRealName());
 

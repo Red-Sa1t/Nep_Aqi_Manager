@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.nep.controller.NepsReportDetailViewController"
+      spacing="20"
+      alignment="TOP_CENTER"
+      stylesheets="@../css/Buttons.css,@../css/TextFields.css"
+      prefWidth="600.0" prefHeight="480.0">
+
+    <padding>
+        <Insets top="40" right="80" bottom="40" left="80"/>
+    </padding>
+
+    <Label text="报告详情编辑"
+           styleClass="login-title" alignment="CENTER">
+        <font>
+            <Font name="Microsoft YaHei UI" size="24"/>
+        </font>
+    </Label>
+
+    <GridPane hgap="15" vgap="15">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" minWidth="140"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+        </columnConstraints>
+
+        <rowConstraints>
+            <RowConstraints minHeight="35"/>
+            <RowConstraints minHeight="120"/>
+            <RowConstraints minHeight="120"/>
+            <RowConstraints minHeight="120"/>
+        </rowConstraints>
+
+        <Label text="关联反馈ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER_RIGHT"/>
+        <MFXTextField fx:id="afIdField" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="请输入反馈ID"/>
+
+        <Label text="污染原因分析:" GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="TOP_RIGHT"/>
+        <TextArea fx:id="pollutionCauseArea" GridPane.columnIndex="1" GridPane.rowIndex="1" prefRowCount="4"
+                  promptText="填写污染原因分析"/>
+
+        <Label text="近期解决方案:" GridPane.columnIndex="0" GridPane.rowIndex="2" alignment="TOP_RIGHT"/>
+        <TextArea fx:id="shortTermSolutionArea" GridPane.columnIndex="1" GridPane.rowIndex="2" prefRowCount="4"
+                  promptText="填写近期解决方案"/>
+
+        <Label text="长期解决方案:" GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="TOP_RIGHT"/>
+        <TextArea fx:id="longTermSolutionArea" GridPane.columnIndex="1" GridPane.rowIndex="3" prefRowCount="4"
+                  promptText="填写长期解决方案"/>
+    </GridPane>
+
+    <HBox spacing="20" alignment="CENTER_RIGHT" prefWidth="1">
+        <MFXButton id="custom" text="保存" onAction="#saveReport" styleClass="button-primary"/>
+    </HBox>
+
+</VBox>

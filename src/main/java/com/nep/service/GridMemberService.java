@@ -1,6 +1,6 @@
 package com.nep.service;
 
-import com.nep.entity.GridMember;
+import com.nep.po.GridMember;
 
 public interface GridMemberService {
     /**

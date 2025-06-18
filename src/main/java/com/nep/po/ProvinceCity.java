@@ -1,4 +1,4 @@
-package com.nep.entity;
+package com.nep.po;
 
 import java.io.Serializable;
 import java.util.ArrayList;

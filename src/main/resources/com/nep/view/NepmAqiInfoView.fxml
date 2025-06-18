@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXTableView?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
-            prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.12"
-            fx:controller="com.nep.controller.NepmAqiInfoViewController">
-        <Label layoutX="182.0" layoutY="20.0" text="公众监督AQI反馈数据列表">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
 
-        </Label>
-    <MFXTableView fx:id="txt_tableView" layoutX="10.0" layoutY="52.0" prefHeight="393.0" prefWidth="630.0"/>
-</AnchorPane>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootStackPane"
+          fx:controller="com.nep.controller.NepmAqiInfoViewController"
+          xmlns="http://javafx.com/javafx/17.0.12"
+          prefWidth="650.0" prefHeight="450.0"
+          stylesheets="@../css/Buttons.css,@../css/TextFields.css">
+
+    <!-- Padding -->
+    <padding>
+        <Insets top="60.0" bottom="60.0" left="100.0" right="100.0"/>
+    </padding>
+
+    <!-- Column Constraints -->
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+    </columnConstraints>
+
+    <!-- Row Constraints -->
+    <rowConstraints>
+        <RowConstraints prefHeight="60.0" vgrow="NEVER"/>   <!-- Title -->
+        <RowConstraints vgrow="ALWAYS"/>                    <!-- Table -->
+    </rowConstraints>
+
+    <!-- Background Styling (Optional) -->
+    <StackPane styleClass="grid-background" GridPane.rowSpan="2147483647">
+        <GridPane.margin>
+            <Insets bottom="-50.0" left="-50.0" right="-50.0" top="-50.0"/>
+        </GridPane.margin>
+    </StackPane>
+
+    <!-- Title -->
+    <Label text="公众监督AQI反馈数据列表"
+           styleClass="login-title" alignment="CENTER"
+           GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <font>
+            <Font name="Microsoft YaHei UI" size="24.0"/>
+        </font>
+    </Label>
+
+    <!-- TableView -->
+    <MFXTableView fx:id="txt_tableView"
+                  prefHeight="400.0" prefWidth="600.0" maxWidth="600.0" maxHeight="400.0"
+                  GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+</GridPane>

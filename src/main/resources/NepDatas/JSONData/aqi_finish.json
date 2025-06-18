@@ -1,0 +1,23 @@
+[
+  {
+    "afId": 5,
+    "afName": "孙七",
+    "proviceName": "浙江省",
+    "cityName": "杭州市",
+    "address": "西湖区88号",
+    "infomation": "32145",
+    "estimateGrade": "二级",
+    "date": "2025-06-15",
+    "state": "已实测",
+    "gmName": "周建国",
+    "confirmDate": "2025-06-15",
+    "so2": 0.6,
+    "co": 6.7,
+    "pm": 65.0,
+    "so2_level": 3,
+    "co_level": 4,
+    "pm_level": 2,
+    "confirmLevel": "二级",
+    "confirmExplain": "轻微污染"
+  }
+]

@@ -1,91 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="450.0" prefWidth="450.0"
+          stylesheets="@../css/Buttons.css,@../css/TextFields.css" xmlns="http://javafx.com/javafx/17.0.12"
+          fx:controller="com.nep.controller.NepsRegisterViewController">
 
+    <!-- Column Constraints -->
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"/>
+        <ColumnConstraints/>
+    </columnConstraints>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/8"
-            fx:controller="com.nep.controller.NepsRegisterViewController">
-    <children>
-        <Label layoutX="181.0" layoutY="45.0" text="环保公众监督平台">
+    <!-- Row Constraints -->
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES"/> <!-- Title -->
+        <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES"/> <!-- Phone -->
+        <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES"/> <!-- Password -->
+        <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES"/> <!-- RePassword -->
+        <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES"/> <!-- RealName -->
+        <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES"/> <!-- Gender -->
+        <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES"/> <!-- Button -->
+        <RowConstraints/>
+    </rowConstraints>
+
+    <!-- Padding -->
+    <padding>
+        <Insets bottom="100.0" left="100.0" right="100.0" top="100.0"/>
+    </padding>
+
+    <!-- Background -->
+    <StackPane styleClass="grid-background" GridPane.rowSpan="2147483647">
+        <GridPane.margin>
+            <Insets bottom="-10.0" left="155.0" right="155.0" top="-10.0"/>
+        </GridPane.margin>
+    </StackPane>
+
+    <!-- Title -->
+    <Label alignment="CENTER" styleClass="login-title" text="公众监督员注册" GridPane.columnIndex="0"
+           GridPane.columnSpan="2" GridPane.rowIndex="0">
+        <font>
+            <Font name="Microsoft YaHei UI" size="24.0"/>
+        </font>
+    </Label>
+
+    <!-- 注册手机号 -->
+    <MFXTextField fx:id="txt_id" floatMode="BORDER" floatingText="注册手机号" prefHeight="38.0" prefWidth="190.0"
+                  promptText="请输入手机号" styleClass="login-input" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                  GridPane.rowIndex="1"/>
+
+    <!-- 密码 -->
+    <MFXPasswordField fx:id="txt_password" floatMode="BORDER" floatingText="密码" prefHeight="38.0" prefWidth="190.0"
+                      promptText="请输入密码" styleClass="login-input" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                      GridPane.rowIndex="2"/>
+
+    <!-- 确认密码 -->
+    <MFXPasswordField fx:id="txt_repassword" floatMode="BORDER" floatingText="确认密码" prefHeight="38.0"
+                      prefWidth="190.0" promptText="请再次输入密码" styleClass="login-input" GridPane.columnIndex="0"
+                      GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+
+    <!-- 真实姓名 -->
+    <MFXTextField fx:id="txt_realName" floatMode="BORDER" floatingText="真实姓名" prefHeight="38.0" prefWidth="190.0"
+                  promptText="请输入姓名" styleClass="login-input" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                  GridPane.rowIndex="4"/>
+    <HBox alignment="CENTER" spacing="15" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+        <MFXRadioButton fx:id="txt_sex" selected="true" text="男">
             <font>
-                <Font name="System Bold" size="36.0" />
+                <Font name="Arial" size="12.0"/>
             </font>
-
-        </Label>
-
-        <Label layoutX="262.0" layoutY="113.0" text="公众监督员注册">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-
-        </Label>
-
-        <Label layoutX="148.0" layoutY="173.0" text="注册手机号:">
-            <font>
-                <Font size="14.0" />
-            </font>
-
-        </Label>
-
-        <Label layoutX="148.0" layoutY="213.0" text="密码:">
-            <font>
-                <Font size="14.0" />
-            </font>
-
-        </Label>
-
-        <Label layoutX="148.0" layoutY="253.0" text="确认密码:">
-            <font>
-                <Font size="14.0" />
-            </font>
-
-        </Label>
-
-        <Label layoutX="148.0" layoutY="290.0" text="真实姓名:">
-            <font>
-                <Font size="14.0" />
-            </font>
-
-        </Label>
-
-        <Label layoutX="148.0" layoutY="330.0" text="性别:">
-            <font>
-                <Font size="14.0" />
-            </font>
-
-        </Label>
-
-        <TextField fx:id="txt_id" layoutX="262.0" layoutY="171.0" prefHeight="23.0" prefWidth="204.0" />
-        <PasswordField fx:id="txt_password" layoutX="262.0" layoutY="211.0" prefHeight="23.0" prefWidth="204.0" />
-        <PasswordField fx:id="txt_repassword" layoutX="262.0" layoutY="251.0" prefHeight="23.0" prefWidth="204.0" />
-        <TextField fx:id="txt_realName" layoutX="262.0" layoutY="288.0" prefHeight="23.0" prefWidth="204.0" />
-        <RadioButton fx:id="txt_sex" layoutX="262.0" layoutY="332.0" mnemonicParsing="false" selected="true" text="男">
             <toggleGroup>
-                <ToggleGroup fx:id="sex" />
+                <ToggleGroup fx:id="sex"/>
             </toggleGroup>
-
-        </RadioButton>
-
-        <RadioButton fx:id="txt_sex" layoutX="325.0" layoutY="332.0" mnemonicParsing="false" text="女" toggleGroup="$sex" />
-        <Button layoutX="426.0" layoutY="380.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="90.0" text="注册">
+        </MFXRadioButton>
+        <MFXRadioButton fx:id="txt_sex" text="女" toggleGroup="$sex">
             <font>
-                <Font size="14.0" />
+                <Font name="Arial" size="12.0"/>
             </font>
+        </MFXRadioButton>
+    </HBox>
 
-        </Button>
+    <!-- 注册按钮 -->
+    <MFXButton id="custom" alignment="CENTER" buttonType="RAISED" onAction="#register" prefHeight="34.0"
+               prefWidth="120.0" text="注册" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6"/>
 
-        <Button layoutX="168.0" layoutY="380.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="90.0" text="返回">
-            <font>
-                <Font size="14.0" />
-            </font>
-
-        </Button>
-
-    </children>
-
-</AnchorPane>
+    <!-- 性别选择 -->
+    <fx:define>
+        <ToggleGroup fx:id="sex"/>
+    </fx:define>
+</GridPane>

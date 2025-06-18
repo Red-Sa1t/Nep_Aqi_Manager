@@ -1,28 +1,31 @@
-package com.nep.entity;
+package com.nep.po;
 
 import java.io.Serializable;
 
-public class AqiFeedback implements Serializable {
+public class AqiFinish implements Serializable {
     /**
      *
      */
     private static final long serialVersionUID = 1L;
-    private Integer afId;        //������Ϣ���
-    private String afName;    //���ڼලԱ����
-    private String proviceName;    //ʡ��������
-    private String cityName;    //����������
-    private String address;        //�����ַ
-    private String infomation;    //��ϸ������Ϣ
-    private String estimateGrade;//Ԥ���ȼ�
-    private String date;        //��������
-    private String state;        //����״̬: δָ��,��ָ��,��ʵ��
-    private String gmName;        //ָ������Ա
-    private String confirmDate;    //ʵ������
-    private Double so2;            //ʵ���������Ũ��
-    private Double co;            //ʵ��һ����̼Ũ��
-    private Double pm;            //ʵ��PM2.5Ũ��
-    private String confirmLevel;//ʵ��AQI�ȼ�
-    private String confirmExplain;//ʵ��AQI�ȼ�����
+    private Integer afId;
+    private String afName;
+    private String proviceName;
+    private String cityName;
+    private String address;
+    private String infomation;
+    private String estimateGrade;
+    private String date;
+    private String state;
+    private String gmName;
+    private String confirmDate;
+    private Double so2;
+    private Double co;
+    private Double pm;
+    private int so2_level;
+    private int co_level;
+    private int pm_level;
+    private String confirmLevel;
+    private String confirmExplain;
 
     public Integer getAfId() {
         return afId;
@@ -152,14 +155,52 @@ public class AqiFeedback implements Serializable {
         this.confirmExplain = confirmExplain;
     }
 
-    @Override
-    public String toString() {
-        return "AqiFeedback [afId=" + afId + ", afName=" + afName + ", proviceName=" + proviceName + ", cityName="
-                + cityName + ", address=" + address + ", infomation=" + infomation + ", estimateGrade=" + estimateGrade
-                + ", date=" + date + ", state=" + state + ", gmName=" + gmName + ", confirmDate=" + confirmDate
-                + ", so2=" + so2 + ", co=" + co + ", pm=" + pm + ", confirmLevel=" + confirmLevel + ", confirmExplain="
-                + confirmExplain + "]";
+    public int getSo2_level() {
+        return so2_level;
     }
 
+    public void setSo2_level(int so2_level) {
+        this.so2_level = so2_level;
+    }
 
+    public int getCo_level() {
+        return co_level;
+    }
+
+    public void setCo_level(int co_level) {
+        this.co_level = co_level;
+    }
+
+    public int getPm_level() {
+        return pm_level;
+    }
+
+    public void setPm_level(int pm_level) {
+        this.pm_level = pm_level;
+    }
+
+    @Override
+    public String toString() {
+        return "AqiFinish{" +
+                "afId=" + afId +
+                ", afName='" + afName + '\'' +
+                ", proviceName='" + proviceName + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", address='" + address + '\'' +
+                ", infomation='" + infomation + '\'' +
+                ", estimateGrade='" + estimateGrade + '\'' +
+                ", date='" + date + '\'' +
+                ", state='" + state + '\'' +
+                ", gmName='" + gmName + '\'' +
+                ", confirmDate='" + confirmDate + '\'' +
+                ", so2=" + so2 +
+                ", co=" + co +
+                ", pm=" + pm +
+                ", so2_level=" + so2_level +
+                ", co_level=" + co_level +
+                ", pm_level=" + pm_level +
+                ", confirmLevel='" + confirmLevel + '\'' +
+                ", confirmExplain='" + confirmExplain + '\'' +
+                '}';
+    }
 }

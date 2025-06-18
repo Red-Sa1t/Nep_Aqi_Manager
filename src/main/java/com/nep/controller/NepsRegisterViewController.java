@@ -1,13 +1,12 @@
 package com.nep.controller;
 
-import com.nep.NepsMain;
-import com.nep.entity.Supervisor;
+import com.nep.manager.TipsManager;
+import com.nep.po.Supervisor;
 import com.nep.service.SupervisorService;
 import com.nep.service.impl.SupervisorServiceImpl;
-import com.nep.util.JavafxUtil;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXRadioButton;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -15,13 +14,13 @@ public class NepsRegisterViewController {
     @FXML
     private TextField txt_id;
     @FXML
-    private PasswordField txt_password;
+    private MFXPasswordField txt_password;
     @FXML
-    private PasswordField txt_repassword;
+    private MFXPasswordField txt_repassword;
     @FXML
     private TextField txt_realName;
     @FXML
-    private RadioButton txt_sex;
+    private MFXRadioButton txt_sex;
     //主舞台
     public static Stage primaryStage;
     //多态
@@ -32,16 +31,20 @@ public class NepsRegisterViewController {
     public void setTxt_id(TextField txt_id) {
         this.txt_id = txt_id;
     }
-    public PasswordField getTxt_password() {
+
+    public MFXPasswordField getTxt_password() {
         return txt_password;
     }
-    public void setTxt_password(PasswordField txt_password) {
+
+    public void setTxt_password(MFXPasswordField txt_password) {
         this.txt_password = txt_password;
     }
-    public PasswordField getTxt_repassword() {
+
+    public MFXPasswordField getTxt_repassword() {
         return txt_repassword;
     }
-    public void setTxt_repassword(PasswordField txt_repassword) {
+
+    public void setTxt_repassword(MFXPasswordField txt_repassword) {
         this.txt_repassword = txt_repassword;
     }
     public TextField getTxt_realName() {
@@ -53,7 +56,7 @@ public class NepsRegisterViewController {
 
     public void register(){
         if(!txt_password.getText().equals(txt_repassword.getText())){
-            JavafxUtil.showAlert(primaryStage, "注册失败", "两次输入密码不一致", "请重新输入确认密码","warn");
+            TipsManager.getInstance().showError("两次密码不一致");
             txt_repassword.setText("");
             return;
         }
@@ -64,17 +67,11 @@ public class NepsRegisterViewController {
         supervisor.setSex(txt_sex.getText());
         boolean flag = supervisorService.register(supervisor);
         if(flag){
-            JavafxUtil.showAlert(primaryStage, "注册成功", txt_id.getText()+" 账号注册成功!","可以进行用户登录!" ,"info");
+            TipsManager.getInstance().showInfo("注册成功！");
         }else{
-            JavafxUtil.showAlert(primaryStage, "注册失败", "手机号已被注册", "请重新输入注册手机号码","warn");
+            TipsManager.getInstance().showError("手机号已被注册！");
             txt_id.setText("");
             return;
         }
-        //跳转到登录界面进行登录
-        JavafxUtil.showStage(NepsMain.class,"view/NepsLoginView.fxml", primaryStage,"东软环保公众监督平台-公众监督员端");
-    }
-
-    public void back(){
-        JavafxUtil.showStage(NepsMain.class,"view/NepsLoginView.fxml", primaryStage,"东软环保公众监督平台-公众监督员端");
     }
 }

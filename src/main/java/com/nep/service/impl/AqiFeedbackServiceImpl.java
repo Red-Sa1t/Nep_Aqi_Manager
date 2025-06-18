@@ -4,8 +4,8 @@ package com.nep.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nep.entity.AqiFeedback;
 import com.nep.io.RWJsonTest;
+import com.nep.po.AqiFeedback;
 import com.nep.service.AqiFeedbackService;
 
 import java.io.FileOutputStream;
@@ -61,40 +61,6 @@ public class AqiFeedbackServiceImpl implements AqiFeedbackService {
 
             outputStream.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void confirmData(AqiFeedback afb) {
-        List<AqiFeedback> afList = new ArrayList<>();
-        try {
-            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json");
-            afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
-            });
-            afb.setAfId(afList.size() + 1);
-            afList.add(afb);
-
-            for (int i = 0; i < afList.size(); i++) {
-                AqiFeedback a = afList.get(i);
-                if (a.getGmName() != null && a.getGmName().equals(afb.getGmName()) && a.getAfId().intValue() == afb.getAfId().intValue()) {
-                    a.setState(afb.getState());
-                    a.setConfirmDate(afb.getConfirmDate());
-                    a.setCo(afb.getCo());
-                    a.setSo2(afb.getSo2());
-                    a.setPm(afb.getPm());
-                    a.setConfirmLevel(afb.getConfirmLevel());
-                    a.setConfirmExplain(afb.getConfirmExplain());
-                    break;
-                }
-            }
-            OutputStream outputStream =
-                    new FileOutputStream(RWJsonTest.class.getClassLoader().getResource("NepDatas/JSONData/aqi_feedback.json").getFile());
-
-            objectMapper.writeValue(outputStream, afList);
-
-            outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

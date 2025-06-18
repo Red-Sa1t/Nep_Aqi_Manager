@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootStackPane" prefHeight="450.0"
+           prefWidth="650.0" stylesheets="@../css/Buttons.css,@../css/TextFields.css"
+           xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.NepReportViewController">
+
+    <GridPane alignment="CENTER">
+        <!-- Padding -->
+        <padding>
+            <Insets bottom="60.0" left="100.0" right="100.0" top="60.0"/>
+        </padding>
+
+        <!-- Column Constraints -->
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+        </columnConstraints>
+
+        <!-- Row Constraints -->
+        <rowConstraints>
+            <RowConstraints prefHeight="60.0" vgrow="NEVER"/>   <!-- Title -->
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints/>                    <!-- Table -->
+        </rowConstraints>
+
+        <!-- Background StackPane -->
+        <StackPane styleClass="grid-background" GridPane.rowSpan="2147483647">
+            <GridPane.margin>
+                <Insets bottom="-50.0" left="-50.0" right="-50.0" top="-50.0"/>
+            </GridPane.margin>
+        </StackPane>
+
+        <!-- Title -->
+        <Label alignment="CENTER" styleClass="login-title" text="污染报告列表" GridPane.columnIndex="0"
+               GridPane.rowIndex="0">
+            <font>
+                <Font name="Microsoft YaHei UI" size="24.0"/>
+            </font>
+        </Label>
+
+        <!-- TableView -->
+        <MFXTableView fx:id="reportTable" prefHeight="400.0" prefWidth="600.0" GridPane.columnIndex="0"
+                      GridPane.rowIndex="1"/>
+
+        <!-- Detail Button -->
+        <MFXButton id="custom" fx:id="btnShowDetails" prefHeight="50.0" prefWidth="138.0" text="查看详情"
+                   GridPane.rowIndex="2"/>
+
+    </GridPane>
+</StackPane>

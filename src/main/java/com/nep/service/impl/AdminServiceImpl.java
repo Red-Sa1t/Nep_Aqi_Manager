@@ -2,8 +2,8 @@ package com.nep.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nep.entity.Admin;
 import com.nep.io.RWJsonTest;
+import com.nep.po.Admin;
 import com.nep.service.AdminService;
 
 import java.io.InputStream;

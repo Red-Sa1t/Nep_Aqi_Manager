@@ -2,7 +2,7 @@ package com.nep.io;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nep.entity.Admin;
+import com.nep.po.Admin;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;

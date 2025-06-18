@@ -1,27 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="631.0" prefWidth="800.0"
+          stylesheets="@../css/Buttons.css,@../css/TextFields.css" xmlns="http://javafx.com/javafx/17.0.12"
+          fx:controller="com.nep.controller.NepmConfirmInfoViewController">
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0"
-            xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.nep.controller.NepmConfirmInfoViewController">
-    <children>
-        <Label layoutX="269.0" layoutY="20.0" text="网格员AQI实测数据列表">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
+    <!-- Padding for the whole GridPane -->
+    <padding>
+        <Insets bottom="60.0" left="100.0" right="100.0" top="60.0"/>
+    </padding>
 
-        </Label>
+    <!-- Column Constraints -->
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+    </columnConstraints>
 
-        <TableView fx:id="txt_tableView" layoutX="25.0" layoutY="65.0" prefHeight="367.0" prefWidth="750.0">
+    <!-- Row Constraints -->
+    <rowConstraints>
+        <RowConstraints maxHeight="91.66666666666669" minHeight="39.0" prefHeight="86.66666666666669"
+                        vgrow="NEVER"/>  <!-- Title -->
+        <RowConstraints maxHeight="460.0" minHeight="237.66666666666669" prefHeight="242.66666666666669"
+                        vgrow="ALWAYS"/>                    <!-- Table -->
+    </rowConstraints>
 
-        </TableView>
+    <!-- Background Styling (Optional) -->
+    <StackPane prefHeight="600.0" prefWidth="700.0" styleClass="grid-background" GridPane.rowSpan="2147483647">
+        <GridPane.margin>
+            <Insets bottom="-50.0" left="-50.0" right="-50.0" top="-50.0"/>
+        </GridPane.margin>
+    </StackPane>
 
-    </children>
+    <!-- Title -->
+    <Label alignment="CENTER" styleClass="login-title" text="网格员AQI实测数据列表" GridPane.columnIndex="0"
+           GridPane.rowIndex="0">
+        <font>
+            <Font name="Microsoft YaHei UI" size="24.0"/>
+        </font>
+    </Label>
 
-</AnchorPane>
+    <MFXScrollPane prefHeight="600.0" prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <MFXTableView fx:id="txt_tableView" prefHeight="402.0" prefWidth="900.0"/>
+    </MFXScrollPane>
+
+</GridPane>

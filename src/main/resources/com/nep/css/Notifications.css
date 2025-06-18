@@ -1,0 +1,19 @@
+.notifications-pane .notification {
+    -fx-background-color: rgba(40, 40, 40, 0.95);
+    -fx-background-radius: 12px;
+    -fx-padding: 15px 25px;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0, 0, 2);
+}
+
+.notifications-pane .title {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #FFA726; /* 亮橙色 */
+}
+
+.notifications-pane .text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #E0E0E0;
+}

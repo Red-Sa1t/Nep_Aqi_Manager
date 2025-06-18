@@ -2,8 +2,8 @@ package com.nep.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nep.entity.GridMember;
 import com.nep.io.RWJsonTest;
+import com.nep.po.GridMember;
 import com.nep.service.GridMemberService;
 
 import java.io.InputStream;

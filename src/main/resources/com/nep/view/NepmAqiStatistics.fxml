@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="700.0"
+            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.NepmAqiStatisticsController">
+
+    <StackPane prefWidth="700" prefHeight="600" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+               AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <VBox spacing="15.0" style="-fx-padding: 20px;" alignment="CENTER">
+
+            <VBox prefWidth="660.0" spacing="15.0"
+                  style="-fx-padding: 20px; -fx-background-color: white; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                <Text style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-fill: #333333;" wrappingWidth="620">
+                    全国各省空气质量指标分析
+                </Text>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <Button fx:id="downloadBtn"
+                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 6px 14px; -fx-background-radius: 4px;"
+                            text="下载图表图片"/>
+                    <Button fx:id="toggleSO2"
+                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 6px 14px; -fx-background-radius: 4px;"
+                            text="隐藏SO₂"/>
+                    <Button fx:id="toggleCO"
+                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 6px 14px; -fx-background-radius: 4px;"
+                            text="隐藏CO"/>
+                    <Button fx:id="togglePM"
+                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 6px 14px; -fx-background-radius: 4px;"
+                            text="隐藏PM"/>
+                </HBox>
+            </VBox>
+
+            <!-- 图表区域 -->
+            <VBox prefWidth="660.0" prefHeight="280.0"
+                  style="-fx-padding: 15px; -fx-background-color: white; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                <Canvas fx:id="aqiChart" width="620.0" height="260.0"/>
+            </VBox>
+
+            <!-- 数据说明区域 -->
+            <VBox prefWidth="660.0" prefHeight="60.0" spacing="5"
+                  style="-fx-padding: 12px; -fx-background-color: #f8f9fa; -fx-background-radius: 8px; -fx-border-color: #3498db; -fx-border-width: 0 0 0 4px;">
+                <Text style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-fill: #333333;">数据说明</Text>
+                <Text style="-fx-fill: #555555;" wrappingWidth="620">
+                    本图表展示了全国各省份的空气质量指标数据，包括二氧化硫(SO₂)、一氧化碳(CO)、悬浮颗粒物(PM2.5)的数值和空气质量指数(AQI)等级。
+                </Text>
+            </VBox>
+
+            <!-- 图例区域 -->
+            <HBox prefWidth="660.0" prefHeight="45.0" spacing="20.0"
+                  style="-fx-padding: 12px; -fx-background-color: white; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);"
+                  alignment="CENTER_LEFT">
+                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                    <Rectangle fill="#e74c3c" height="16.0" width="16.0"/>
+                    <Text style="-fx-fill: #333333;">二氧化硫(SO₂)</Text>
+                </HBox>
+                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                    <Rectangle fill="#3498db" height="16.0" width="16.0"/>
+                    <Text style="-fx-fill: #333333;">一氧化碳(CO)</Text>
+                </HBox>
+                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                    <Rectangle fill="#2ecc71" height="16.0" width="16.0"/>
+                    <Text style="-fx-fill: #333333;">悬浮颗粒物(PM2.5)</Text>
+                </HBox>
+            </HBox>
+
+        </VBox>
+    </StackPane>
+
+</AnchorPane>

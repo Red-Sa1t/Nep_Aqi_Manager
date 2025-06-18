@@ -2,12 +2,12 @@ package com.nep.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nep.entity.AqiFeedback;
-import com.nep.entity.GridMember;
 import com.nep.io.RWJsonTest;
+import com.nep.manager.TipsManager;
+import com.nep.po.AqiFeedback;
+import com.nep.po.GridMember;
 import com.nep.service.AqiFeedbackService;
 import com.nep.service.impl.AqiFeedbackServiceImpl;
-import com.nep.util.JavafxUtil;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -80,9 +80,9 @@ public class NepmAqiAssignViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         //初始化三个pane容器样式
-        txt_pane1.setStyle("-fx-border-color: #CCC;");
-        txt_pane2.setStyle("-fx-background-color: #CCC;");
-        txt_pane3.setStyle("-fx-border-color: #CCC;");
+//        txt_pane1.setStyle("-fx-border-color: #CCC;");
+//        txt_pane2.setStyle("-fx-background-color: #CCC;");
+//        txt_pane3.setStyle("-fx-border-color: #CCC;");
         //标签初始化
         initConroller();
         //初始化网格员
@@ -112,7 +112,7 @@ public class NepmAqiAssignViewController implements Initializable {
 
         boolean flag = true;
         for (AqiFeedback af : alist) {
-            if(af.getAfId().toString().equals(afId) && af.getState().equals("未指派")){
+            if (af.getAfId().toString().equals(afId)) {
                 flag = false;
                 label_afId.setText(af.getAfId()+"");
                 label_afName.setText(af.getAfName());
@@ -126,7 +126,7 @@ public class NepmAqiAssignViewController implements Initializable {
             }
         }
         if(flag){
-            JavafxUtil.showAlert(aqiInfoStage, "查询失败", "未找到当前编号反馈信息", "请重新输入AQI反馈数据编号","warn");
+            TipsManager.getInstance().showError("未找到当前编号反馈信息");
             initConroller();
         }
         } catch (Exception e) {
@@ -137,16 +137,16 @@ public class NepmAqiAssignViewController implements Initializable {
     public void assignGridMember(){
         //前做判断
         if(label_afId.getText().equals("无")){
-            JavafxUtil.showAlert(aqiInfoStage, "指派失败", "未找到要指派的反馈信息", "请选择要指派的反馈信息","warn");
+            TipsManager.getInstance().showError("未找到要指派的反馈信息");
             return;
         }
         if(combo_realName.getValue().equals("请选择网格员")){
-            JavafxUtil.showAlert(aqiInfoStage, "指派失败", "您没有选择要指派的网格员", "请选择您要指派的网格员","warn");
+            TipsManager.getInstance().showError("未指派网格员");
             return;
         }
         String afId = label_afId.getText();
         aqiFeedbackService.assignGridMember(afId, combo_realName.getValue());
-        JavafxUtil.showAlert(aqiInfoStage, "指派成功", "AQI反馈信息指派成功!", "请等待网格员实测数据信息","info");
+        TipsManager.getInstance().showInfo("网格员指派成功");
         initConroller();
     }
 
