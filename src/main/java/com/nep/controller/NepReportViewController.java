@@ -38,17 +38,14 @@ public class NepReportViewController implements Initializable {
     private static final ClassLoader classLoader = RWJsonTest.class.getClassLoader();
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final String REPORT_JSON_PATH = "NepDatas/JSONData/reports.json";
-    private final Stage stage;
     public StackPane rootStackPane;
     public MFXButton btnShowDetails;
-    MFXGenericDialog dialogContent;
-    MFXStageDialog dialog;
-    @FXML
-    private MFXTableView<Report> reportTable;
+    private final Stage stage;
 
     NepReportViewController(Stage stage) {
         this.stage = stage;
     }
+    MFXGenericDialog dialogContent;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -121,6 +118,9 @@ public class NepReportViewController implements Initializable {
 
         reportTable.setItems(data);
     }
+    MFXStageDialog dialog;
+    @FXML
+    private MFXTableView<Report> reportTable;
 
     private void showDetailsDialog(Report report) {
         String content = String.format(

@@ -10,8 +10,8 @@ package com.nep.controller;
 //import io.github.palexdev.materialfx.utils.others.loader.MFXLoaderBean;
 //import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
 
+import com.nep.MFXDemoResourcesLoader;
 import com.nep.manager.TipsManager;
-import com.nep.util.MFXDemoResourcesLoader;
 import io.github.palexdev.materialfx.controls.MFXIconWrapper;
 import io.github.palexdev.materialfx.controls.MFXRectangleToggleNode;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
@@ -41,7 +41,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static com.nep.util.MFXDemoResourcesLoader.loadURL;
+import static com.nep.MFXDemoResourcesLoader.loadURL;
 
 public class InitController implements Initializable {
     public static Stage stage = null;

@@ -41,11 +41,11 @@ public class NepmAqiInfoViewController implements Initializable {
 
     public static final ClassLoader classLoader = RWJsonTest.class.getClassLoader();
     public static final ObjectMapper objectMapper = new ObjectMapper();
-    private final Stage stage;
     @FXML
     public GridPane rootStackPane;
     MFXGenericDialog dialogContent;
     MFXStageDialog dialog;
+    private final Stage stage;
 
     NepmAqiInfoViewController(Stage stage) {
         this.stage = stage;

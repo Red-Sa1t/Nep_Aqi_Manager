@@ -24,9 +24,6 @@ import java.util.Map;
 
 public class NepmAqiStatisticsController {
 
-    private final Color COLOR_SO2 = Color.rgb(231, 76, 60);
-    private final Color COLOR_CO = Color.rgb(52, 152, 219);
-    private final Color COLOR_PM = Color.rgb(46, 204, 113);
     @FXML
     private Canvas aqiChart;
     @FXML
@@ -37,10 +34,15 @@ public class NepmAqiStatisticsController {
     private Button toggleCO;
     @FXML
     private Button togglePM;
+
     private Map<String, double[]> provinceData = new HashMap<>();
     private boolean showSO2 = true;
     private boolean showCO = true;
     private boolean showPM = true;
+
+    private final Color COLOR_SO2 = Color.rgb(231, 76, 60);
+    private final Color COLOR_CO = Color.rgb(52, 152, 219);
+    private final Color COLOR_PM = Color.rgb(46, 204, 113);
 
     public void initialize() {
         loadAqiFinishData();

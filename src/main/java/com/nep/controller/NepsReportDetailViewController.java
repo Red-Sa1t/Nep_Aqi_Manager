@@ -15,9 +15,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NepsReportDetailViewController implements Initializable {
-    public static Report report;
-    public static Supervisor supervisor;
-    public static Stage primaryStage;
     @FXML
     private TextField afIdField;
     @FXML
@@ -26,7 +23,11 @@ public class NepsReportDetailViewController implements Initializable {
     private TextArea shortTermSolutionArea;
     @FXML
     private TextArea longTermSolutionArea;
+
     private ReportService reportService = new ReportServiceImpl();
+    public static Report report;
+    public static Supervisor supervisor;
+    public static Stage primaryStage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -22,10 +22,11 @@ import java.util.ResourceBundle;
 
 public class NepmConfirmInfoViewController implements Initializable {
 
-    public static final ClassLoader classLoader = RWJsonTest.class.getClassLoader();
-    public static final ObjectMapper objectMapper = new ObjectMapper();
     @FXML
     private MFXTableView<AqiFinish> txt_tableView;
+
+    public static final ClassLoader classLoader = RWJsonTest.class.getClassLoader();
+    public static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

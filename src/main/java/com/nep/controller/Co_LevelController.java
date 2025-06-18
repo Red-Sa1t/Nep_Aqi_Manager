@@ -22,16 +22,9 @@ import java.util.Map;
 
 public class Co_LevelController {
 
-    private static final Color[] levelColors = {
-            Color.rgb(129, 212, 250),  // 一级：浅蓝
-            Color.rgb(77, 182, 172),   // 二级：青绿
-            Color.rgb(255, 224, 130),  // 三级：橙黄
-            Color.rgb(255, 171, 145),  // 四级：浅红
-            Color.rgb(239, 154, 154),  // 五级：粉红
-            Color.rgb(186, 104, 200)   // 六级：紫色
-    };
     @FXML
     private PieChart pieChart; // 直接用 JavaFX 原生 PieChart
+
     @FXML
     private BarChart<String, Number> barChart;
 
@@ -41,6 +34,15 @@ public class Co_LevelController {
         setupChartInteractions();
         loadProvinceCOData();
     }
+
+    private static final Color[] levelColors = {
+            Color.rgb(129, 212, 250),  // 一级：浅蓝
+            Color.rgb(77, 182, 172),   // 二级：青绿
+            Color.rgb(255, 224, 130),  // 三级：橙黄
+            Color.rgb(255, 171, 145),  // 四级：浅红
+            Color.rgb(239, 154, 154),  // 五级：粉红
+            Color.rgb(186, 104, 200)   // 六级：紫色
+    };
 
     private void loadProvinceCOData() {
         try {

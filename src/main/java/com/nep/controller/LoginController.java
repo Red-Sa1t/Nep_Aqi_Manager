@@ -1,5 +1,6 @@
 package com.nep.controller;
 
+import com.nep.MFXDemoResourcesLoader;
 import com.nep.manager.TipsManager;
 import com.nep.po.GridMember;
 import com.nep.service.AdminService;
@@ -8,7 +9,6 @@ import com.nep.service.SupervisorService;
 import com.nep.service.impl.AdminServiceImpl;
 import com.nep.service.impl.GridMemberServiceImpl;
 import com.nep.service.impl.SupervisorServiceImpl;
-import com.nep.util.MFXDemoResourcesLoader;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXRadioButton;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
