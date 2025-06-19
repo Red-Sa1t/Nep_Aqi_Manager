@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="631.0" prefWidth="800.0"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootStackPane" prefHeight="631.0" prefWidth="800.0"
           stylesheets="@../css/Buttons.css,@../css/TextFields.css" xmlns="http://javafx.com/javafx/17.0.12"
           fx:controller="com.nep.controller.NepmConfirmInfoViewController">
 
@@ -46,5 +47,10 @@
     <MFXScrollPane prefHeight="600.0" prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <MFXTableView fx:id="txt_tableView" prefHeight="402.0" prefWidth="900.0"/>
     </MFXScrollPane>
+
+    <!-- Detail Button -->
+    <MFXButton fx:id="btnShowDetails" prefHeight="50.0" prefWidth="138.0" text="查看详情"
+               id="custom_M"
+               GridPane.rowIndex="2"/>
 
 </GridPane>

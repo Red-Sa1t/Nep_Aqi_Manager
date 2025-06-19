@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.*?>
@@ -18,16 +18,16 @@
                     全国各省空气质量指标分析
                 </Text>
                 <HBox spacing="10.0" alignment="CENTER_LEFT">
-                    <Button fx:id="downloadBtn"
-                            id="custom_M"
-                            text="下载图表图片"/>
-                    <Button fx:id="toggleSO2"
+                    <MFXButton fx:id="downloadBtn"
+                               id="custom_M"
+                               text="下载图表图片"/>
+                    <MFXButton fx:id="toggleSO2"
                             id="custom_M"
                             text="隐藏SO₂"/>
-                    <Button fx:id="toggleCO"
+                    <MFXButton fx:id="toggleCO"
                             id="custom_M"
                             text="隐藏CO"/>
-                    <Button fx:id="togglePM"
+                    <MFXButton fx:id="togglePM"
                             id="custom_M"
                             text="隐藏PM"/>
                 </HBox>

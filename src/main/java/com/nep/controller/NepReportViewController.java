@@ -3,6 +3,8 @@ package com.nep.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nep.io.RWJsonTest;
+import com.nep.manager.TipsManager;
+import com.nep.po.AqiFeedback;
 import com.nep.po.Report;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
@@ -23,8 +25,6 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -56,14 +56,7 @@ public class NepReportViewController implements Initializable {
             if (selected != null) {
                 showDetailsDialog(selected);
             } else {
-                Notifications.create()
-                        .title("提示")
-                        .text("请先选择一条报告记录")
-                        .graphic(null)
-                        .hideAfter(Duration.seconds(3))
-                        .position(Pos.TOP_RIGHT)
-                        .darkStyle()
-                        .showWarning();
+                TipsManager.getInstance().showWarning("请先选择一条报告");
             }
         });
     }
@@ -138,6 +131,47 @@ public class NepReportViewController implements Initializable {
                 report.getLongTermSolution(),
                 report.getCreateDate().toString(),
                 report.getCreator()
+        );
+
+        dialogContent = MFXGenericDialogBuilder.build()
+                .setContentText(content)
+                .makeScrollable(true)
+                .get();
+        dialogContent.setHeaderText("报告详细信息");
+        dialogContent.setContentText(content);
+        dialogContent.setMaxWidth(400);
+        dialogContent.setPadding(new Insets(20));
+        dialogContent.setShowClose(true);
+
+        dialog = MFXGenericDialogBuilder.build(dialogContent)
+                .toStageDialogBuilder()
+                .initOwner(stage)
+                .initModality(Modality.APPLICATION_MODAL)
+                .setDraggable(true)
+                .setTitle("报告详细信息")
+                .setOwnerNode(rootStackPane)
+                .setScrimPriority(ScrimPriority.WINDOW)
+                .setScrimOwner(true)
+                .get();
+        MFXFontIcon infoIcon = new MFXFontIcon("fas-circle-info", 18);
+        dialogContent.setHeaderIcon(infoIcon);
+        dialogContent.setHeaderText("报告详细信息");
+        dialog.showDialog();
+    }
+
+    private void showDetailsDialog(AqiFeedback feedback) {
+        String content = String.format(
+                "反馈ID: %d\n反馈人: %s\n所在省份: %s\n城市: %s\n详细地址: %s\n信息描述: %s\n估计等级: %s\n反馈日期: %s\n状态: %s\n管理员: %s",
+                feedback.getAfId(),
+                feedback.getAfName(),
+                feedback.getProviceName(),
+                feedback.getCityName(),
+                feedback.getAddress(),
+                feedback.getInfomation(),
+                feedback.getEstimateGrade(),
+                feedback.getDate(),
+                feedback.getState(),
+                feedback.getGmName()
         );
 
         dialogContent = MFXGenericDialogBuilder.build()

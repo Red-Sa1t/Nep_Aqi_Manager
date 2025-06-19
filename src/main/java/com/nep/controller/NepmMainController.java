@@ -136,7 +136,7 @@ public class NepmMainController implements Initializable {
         loader.addView(MFXLoaderBean.of("公众监督AQI反馈数据列表", loadURL("view/NepmAqiInfoView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-circle-dot", "公共监督AQI反馈数据列表")).setControllerFactory(c -> new NepmAqiInfoViewController(stage)).setDefaultRoot(true).get());
         loader.addView(MFXLoaderBean.of("公众监督AQI反馈数据指派", loadURL("view/NepmAqiAssignView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-toggle-on", "公众监督AQI反馈数据指派")).get());
 //        loader.addView(MFXLoaderBean.of("管理AQI实测数据信息", loadURL("view/NepgAqiConfirmView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-square-caret-down", "管理AQI实测数据信息")).setDefaultRoot(true).get());
-        loader.addView(MFXLoaderBean.of("网格员AQI实测数据列表", loadURL("view/NepmConfirmInfoView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-comments", "网格员AQI实测数据列表")).get());
+        loader.addView(MFXLoaderBean.of("网格员AQI实测数据列表", loadURL("view/NepmConfirmInfoView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-comments", "网格员AQI实测数据列表")).setControllerFactory(c -> new NepmConfirmInfoViewController(stage)).get());
         loader.addView(MFXLoaderBean.of("AQI监督报告浏览", loadURL("view/NepReportView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-square-caret-down", "AQI监督报告浏览")).setControllerFactory(c -> new NepReportViewController(stage)).get());
         loader.addView(MFXLoaderBean.of("AQI信息分析", loadURL("view/NepmAqiStatistics.fxml")).setBeanToNodeMapper(() -> createToggle("fas-italic", "AQI信息分析")).get());
         loader.addView(MFXLoaderBean.of("CO等级饼状统计", loadURL("view/NepmCoLevel.fxml")).setBeanToNodeMapper(() -> createToggle("fas-rectangle-list", "CO等级饼状统计")).get());

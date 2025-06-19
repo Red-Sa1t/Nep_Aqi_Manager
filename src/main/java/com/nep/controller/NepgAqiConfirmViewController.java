@@ -179,17 +179,22 @@ public class NepgAqiConfirmViewController implements Initializable {
                 return;
             }
 
-            AqiFeedback data = new AqiFeedback();
+            AqiFeedback data = null;
             try (InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json")) {
                 List<AqiFeedback> afList = objectMapper.readValue(inputStream, new TypeReference<>() {
                 });
-                for (AqiFeedback aqi : afList) {
-                    if (aqi.getAfId().equals(txt_afId)) {
-                        data = aqi;
+                for (AqiFeedback afb : afList) {
+                    if (afb.getGmName() != null && afb.getGmName().equals(gridMember.getRealName()) && "已指派".equals(afb.getState())) {
+                        data = afb;
+                        break;
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+            if (data == null) {
+                TipsManager.getInstance().showWarning("未找到对应的Aqi反馈");
+                return;
             }
             AqiFinish afb = new AqiFinish();
             afb.setAfName(data.getAfName());
@@ -213,7 +218,7 @@ public class NepgAqiConfirmViewController implements Initializable {
             afb.setPm_level(pmlevel);
 
             aqiFinishService.confirmData(afb);
-            TipsManager.getInstance().showInfo("污染物实测数据提交成功");
+            TipsManager.getInstance().showInfo("Aqi实测数据提交成功");
             loadTableData();
             reset();
         } catch (Exception e) {

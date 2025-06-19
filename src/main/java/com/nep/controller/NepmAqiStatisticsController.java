@@ -2,12 +2,12 @@ package com.nep.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nep.po.AqiFinish;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -27,13 +27,13 @@ public class NepmAqiStatisticsController {
     @FXML
     private Canvas aqiChart;
     @FXML
-    private Button downloadBtn;
+    private MFXButton downloadBtn;
     @FXML
-    private Button toggleSO2;
+    private MFXButton toggleSO2;
     @FXML
-    private Button toggleCO;
+    private MFXButton toggleCO;
     @FXML
-    private Button togglePM;
+    private MFXButton togglePM;
 
     private Map<String, double[]> provinceData = new HashMap<>();
     private boolean showSO2 = true;

@@ -16,5 +16,96 @@
     "longTermSolution": "制定绿色施工标准",
     "createDate": "2025-06-17T11:00:00.000+08:00",
     "creator": "李四"
+  },
+  {
+    "reportId": 3,
+    "afId": 103,
+    "pollutionCause": "交通尾气排放集中",
+    "shortTermSolution": "高峰期限行并优化红绿灯时长",
+    "longTermSolution": "发展公共交通系统，推动新能源汽车替代",
+    "createDate": "2025-06-17T11:30:00.000+08:00",
+    "creator": "王五"
+  },
+  {
+    "reportId": 4,
+    "afId": 104,
+    "pollutionCause": "燃煤锅炉排放",
+    "shortTermSolution": "限制使用时间并增加检测频率",
+    "longTermSolution": "推动清洁能源改造",
+    "createDate": "2025-06-17T12:00:00.000+08:00",
+    "creator": "赵六"
+  },
+  {
+    "reportId": 5,
+    "afId": 105,
+    "pollutionCause": "露天焚烧垃圾",
+    "shortTermSolution": "加强巡查并设立举报机制",
+    "longTermSolution": "提升垃圾分类和回收体系",
+    "createDate": "2025-06-17T12:30:00.000+08:00",
+    "creator": "钱七"
+  },
+  {
+    "reportId": 6,
+    "afId": 106,
+    "pollutionCause": "重型车辆穿城运输",
+    "shortTermSolution": "设置限时通行区域",
+    "longTermSolution": "建设绕城货运专用通道",
+    "createDate": "2025-06-17T13:00:00.000+08:00",
+    "creator": "孙八"
+  },
+  {
+    "reportId": 7,
+    "afId": 107,
+    "pollutionCause": "化工厂违规排放",
+    "shortTermSolution": "立即叫停生产并核查排放记录",
+    "longTermSolution": "建设智能监控系统与自动报警装置",
+    "createDate": "2025-06-17T13:30:00.000+08:00",
+    "creator": "周九"
+  },
+  {
+    "reportId": 8,
+    "afId": 108,
+    "pollutionCause": "市区餐饮油烟排放",
+    "shortTermSolution": "加强油烟净化器安装检查",
+    "longTermSolution": "推动集中统一排放处理系统建设",
+    "createDate": "2025-06-17T14:00:00.000+08:00",
+    "creator": "吴十"
+  },
+  {
+    "reportId": 9,
+    "afId": 109,
+    "pollutionCause": "施工车辆带泥上路扬尘",
+    "shortTermSolution": "设置冲洗装置并严格执行清洗",
+    "longTermSolution": "完善施工单位环保考核制度",
+    "createDate": "2025-06-17T14:30:00.000+08:00",
+    "creator": "郑十一"
+  },
+  {
+    "reportId": 10,
+    "afId": 110,
+    "pollutionCause": "港口货运作业扬尘",
+    "shortTermSolution": "作业区洒水和封闭堆场",
+    "longTermSolution": "港区绿色转型升级",
+    "createDate": "2025-06-17T15:00:00.000+08:00",
+    "creator": "冯十二"
+  },
+  {
+    "reportId": 11,
+    "afId": 111,
+    "pollutionCause": "地面沙尘影响",
+    "shortTermSolution": "植被恢复与防风网建设",
+    "longTermSolution": "推进生态屏障工程",
+    "createDate": "2025-06-17T15:30:00.000+08:00",
+    "creator": "陈十三"
+  },
+  {
+    "reportId": 12,
+    "afId": 112,
+    "pollutionCause": "生活垃圾集中堆放",
+    "shortTermSolution": "及时清运并加盖防尘布",
+    "longTermSolution": "建设现代化垃圾处理中心",
+    "createDate": "2025-06-17T16:00:00.000+08:00",
+    "creator": "褚十四"
   }
 ]
+

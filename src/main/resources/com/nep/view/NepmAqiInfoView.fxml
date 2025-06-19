@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -48,4 +49,9 @@
     <MFXTableView fx:id="txt_tableView"
                   prefHeight="400.0" prefWidth="600.0" maxWidth="600.0" maxHeight="400.0"
                   GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+    <!-- Detail Button -->
+    <MFXButton fx:id="btnShowDetails" prefHeight="50.0" prefWidth="138.0" text="查看详情"
+               id="custom_M"
+               GridPane.rowIndex="2"/>
 </GridPane>
