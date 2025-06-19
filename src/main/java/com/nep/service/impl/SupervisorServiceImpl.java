@@ -12,8 +12,6 @@ import com.nep.service.SupervisorService;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,8 +56,9 @@ public class SupervisorServiceImpl implements SupervisorService {
                 }
             }
             slist.add(supervisor);
-            Path path = Paths.get("src/main/resources/NepDatas/JSONData/supervisor.json");
-            OutputStream outputStream = new FileOutputStream(path.toFile());
+            OutputStream outputStream =
+                    new FileOutputStream(RWJsonTest.class.getClassLoader().getResource("NepDatas/JSONData/supervisor.json").getFile());
+
             objectMapper.writeValue(outputStream, slist);
 
             outputStream.close();

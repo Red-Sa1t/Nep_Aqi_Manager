@@ -40,5 +40,11 @@
     "password": "3333",
     "realName": "成龙",
     "sex": "女"
+  },
+  {
+    "loginCode": "100",
+    "password": "100",
+    "realName": "100",
+    "sex": "女"
   }
 ]
