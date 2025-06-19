@@ -8,6 +8,7 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXRadioButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
@@ -82,6 +83,8 @@ public class NepsRegisterViewController {
     }
 
     public void handleEnterKey(KeyEvent keyEvent) {
-        register();
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            register();
+        }
     }
 }

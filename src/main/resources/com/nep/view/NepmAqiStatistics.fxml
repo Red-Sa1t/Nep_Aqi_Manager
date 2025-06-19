@@ -6,7 +6,8 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="700.0"
-            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.NepmAqiStatisticsController">
+            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.NepmAqiStatisticsController"
+            stylesheets="@../css/TextFields.css,@../css/Buttons.css">
 
     <StackPane prefWidth="700" prefHeight="600" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
                AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">

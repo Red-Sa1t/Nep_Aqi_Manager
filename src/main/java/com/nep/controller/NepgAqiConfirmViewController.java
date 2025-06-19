@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -245,6 +246,8 @@ public class NepgAqiConfirmViewController implements Initializable {
     }
 
     public void handleEnterKey(KeyEvent keyEvent) {
-        confirmData();
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            confirmData();
+        }
     }
 }

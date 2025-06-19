@@ -261,7 +261,7 @@ public class NepLoginController {
     @FXML
     private void handleEnterKey(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
-            login(); // 调用登录方法
+            login();
         }
     }
 }

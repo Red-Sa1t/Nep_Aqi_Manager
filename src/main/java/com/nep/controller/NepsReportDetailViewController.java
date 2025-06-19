@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
@@ -83,6 +84,8 @@ public class NepsReportDetailViewController implements Initializable {
     }
 
     public void handleEnterKey(KeyEvent keyEvent) {
-        saveReport();
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            saveReport();
+        }
     }
 }
