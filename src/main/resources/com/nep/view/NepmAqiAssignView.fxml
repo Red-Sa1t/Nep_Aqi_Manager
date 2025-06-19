@@ -42,7 +42,8 @@
             <children>
                 <MFXTextField fx:id="txt_afId" minHeight="-Infinity" prefHeight="37.0" prefWidth="215.0"
                               promptText="输入编号" styleClass="custom-field"/>
-                <MFXButton id="custom" buttonType="RAISED" onAction="#queryFeedback" prefHeight="48.0" prefWidth="78.0"
+                <MFXButton id="custom_M" buttonType="RAISED" onAction="#queryFeedback" prefHeight="48.0"
+                           prefWidth="78.0"
                            styleClass="action-button" text="查询"/>
             </children>
         </HBox>
@@ -116,8 +117,8 @@
                     </font>
                 </Label>
                 <MFXComboBox fx:id="combo_realName" minHeight="-Infinity" prefHeight="34.0" prefWidth="200"
-                             promptText="选择网格员"/>
-                <MFXButton id="custom" buttonType="RAISED" onAction="#assignGridMember" prefHeight="33.0"
+                             promptText="选择网格员" onKeyPressed="#handleEnterKey"/>
+                <MFXButton id="custom_M" buttonType="RAISED" onAction="#assignGridMember" prefHeight="33.0"
                            prefWidth="64.0" styleClass="action-button" text="立即指派"/>
             </HBox>
         </TitledPane>

@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class Co_LevelController {
+public class NepmCoLevelController {
 
     @FXML
     private PieChart pieChart; // 直接用 JavaFX 原生 PieChart

@@ -5,9 +5,10 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<AnchorPane fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0" styleClass="rootPane" stylesheets="@../css/Login.css"
-            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.nep.controller.InitController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0"
+            styleClass="rootPane"
+            stylesheets="@../css/Nepv.css" xmlns="http://javafx.com/javafx/17"
+            fx:controller="com.nep.controller.NepvMainController">
     <HBox fx:id="windowHeader" alignment="CENTER_RIGHT" layoutY="6.0" prefHeight="50.0" prefWidth="1281.0"
           spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
@@ -20,12 +21,12 @@
     <VBox layoutX="227.0" layoutY="51.0" prefWidth="250.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0"
           AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
-            <Insets bottom="10.0" left="10.0" top="60.0"/>
+            <Insets bottom="10.0" left="10.0" top="30.0"/>
         </padding>
-        <Label graphicTextGap="15.0" styleClass="header" text="东软环保公众监督系统"
-               alignment="CENTER"
-               style="-fx-font-family: 'Source Han Sans SC'; -fx-font-weight: bold; -fx-font-size: 18px;"/>
-        <Label graphicTextGap="15.0" styleClass="header" text="LOGIN">
+        <Label alignment="CENTER" graphicTextGap="15.0" prefHeight="64.0" prefWidth="231.0"
+               style="-fx-font-family: 'Source Han Sans SC'; -fx-font-weight: bold; -fx-font-size: 18px;"
+               styleClass="header" text="东软环保公众监督系统" textAlignment="CENTER"/>
+        <Label graphicTextGap="15.0" styleClass="header" text="VISIONARY">
             <graphic>
                 <StackPane fx:id="logoContainer"/>
             </graphic>

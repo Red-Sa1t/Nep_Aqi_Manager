@@ -19,16 +19,16 @@
                 </Text>
                 <HBox spacing="10.0" alignment="CENTER_LEFT">
                     <Button fx:id="downloadBtn"
-                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 6px 14px; -fx-background-radius: 4px;"
+                            id="custom_M"
                             text="下载图表图片"/>
                     <Button fx:id="toggleSO2"
-                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 6px 14px; -fx-background-radius: 4px;"
+                            id="custom_M"
                             text="隐藏SO₂"/>
                     <Button fx:id="toggleCO"
-                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 6px 14px; -fx-background-radius: 4px;"
+                            id="custom_M"
                             text="隐藏CO"/>
                     <Button fx:id="togglePM"
-                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 6px 14px; -fx-background-radius: 4px;"
+                            id="custom_M"
                             text="隐藏PM"/>
                 </HBox>
             </VBox>

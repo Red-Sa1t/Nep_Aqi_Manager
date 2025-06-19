@@ -6,9 +6,11 @@ import com.nep.po.GridMember;
 import com.nep.service.AdminService;
 import com.nep.service.GridMemberService;
 import com.nep.service.SupervisorService;
+import com.nep.service.VisionaryService;
 import com.nep.service.impl.AdminServiceImpl;
 import com.nep.service.impl.GridMemberServiceImpl;
 import com.nep.service.impl.SupervisorServiceImpl;
+import com.nep.service.impl.VisionaryServiceImpl;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXRadioButton;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
@@ -26,7 +28,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class LoginController {
+public class NepLoginController {
 
     // 主舞台
     public static Stage primaryStage;
@@ -34,11 +36,15 @@ public class LoginController {
     private final SupervisorService supervisorService = new SupervisorServiceImpl();
     private final AdminService adminService = new AdminServiceImpl();
     private final GridMemberService gridMemberService = new GridMemberServiceImpl();
+    private final VisionaryService visionaryService = new VisionaryServiceImpl();
     // UI 组件
     @FXML
     private MFXRadioButton rb_admin;
     @FXML
     private MFXRadioButton rb_supervisor;
+    @FXML
+    private MFXRadioButton rb_visionary;
+
     @FXML
     private MFXRadioButton rb_grid;
     @FXML
@@ -85,6 +91,9 @@ public class LoginController {
             case "grid":
                 handleGridMemberLogin(username, password);
                 break;
+            case "visionary":
+                handleVisionaryLogin(username, password);
+                break;
             default:
                 TipsManager.getInstance().showError("请选择有效的登录角色");
         }
@@ -98,6 +107,7 @@ public class LoginController {
             //SceneManager.getInstance().addScene("管理员界面","view/NepmAqiAssignView.fxml","fas-arrow-right-to-city","公众监督AQI反馈数据指派");
 
             try {
+                CheckStage();
                 FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/NepmMainView.fxml"));
                 Stage newStage = new Stage();
                 loader.setControllerFactory(c -> new NepmMainController(newStage));
@@ -111,7 +121,6 @@ public class LoginController {
                 newStage.setTitle("Main");
                 newStage.show();
 
-                InitController.stage.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -127,6 +136,7 @@ public class LoginController {
         if (supervisorService.login(username, password)) {
 
             try {
+                CheckStage();
                 FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/NepsMainView.fxml"));
                 Stage newStage = new Stage();
                 loader.setControllerFactory(c -> new NepsMainController(newStage));
@@ -139,7 +149,7 @@ public class LoginController {
                 newStage.setScene(newScene);
                 newStage.show();
 
-                InitController.stage.close();
+                NepInitController.stage.close();
                 // 关闭当前窗口
             } catch (IOException e) {
                 e.printStackTrace();
@@ -160,6 +170,7 @@ public class LoginController {
 
 
             try {
+                CheckStage();
                 FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/NepgMainView.fxml"));
                 Stage newStage = new Stage();
                 loader.setControllerFactory(c -> new NepgMainController(newStage));
@@ -172,13 +183,62 @@ public class LoginController {
                 newStage.setScene(newScene);
                 newStage.show();
 
-                InitController.stage.close();
+                NepInitController.stage.close();
                 // 关闭当前窗口
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             TipsManager.getInstance().showError("网格员账号或密码错误");
+        }
+    }
+
+    /**
+     * 处理决策者登录
+     */
+    private void handleVisionaryLogin(String username, String password) {
+        if (visionaryService.login(username, password)) {
+            //SceneManager.getInstance().addScene("管理员界面","view/NepmAqiAssignView.fxml","fas-arrow-right-to-city","公众监督AQI反馈数据指派");
+
+            try {
+                CheckStage();
+                FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/NepvMainView.fxml"));
+                Stage newStage = new Stage();
+                loader.setControllerFactory(c -> new NepvMainController(newStage));
+                Parent root = loader.load();
+
+                Scene newScene = new Scene(root);
+                MFXThemeManager.addOn(newScene, Themes.DEFAULT);
+                newScene.setFill(Color.TRANSPARENT);
+                newStage.initStyle(StageStyle.TRANSPARENT);
+                newStage.setScene(newScene);
+                newStage.setTitle("Main");
+                newStage.show();
+
+                NepInitController.stage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            TipsManager.getInstance().showError("决策者账号或密码错误");
+        }
+    }
+
+    private void CheckStage() {
+        if (NepmMainController.GetStage() != null) {
+            NepmMainController.CloseStage();
+        }
+        if (NepsMainController.GetStage() != null) {
+            NepsMainController.CloseStage();
+        }
+        if (NepvMainController.GetStage() != null) {
+            NepvMainController.CloseStage();
+        }
+        if (NepgMainController.GetStage() != null) {
+            NepgMainController.CloseStage();
+        }
+        if (NepInitController.GetStage() != null) {
+            NepInitController.CloseStage();
         }
     }
 
@@ -192,6 +252,8 @@ public class LoginController {
             return "supervisor";
         } else if (rb_grid.isSelected()) {
             return "grid";
+        } else if (rb_visionary.isSelected()) {
+            return "visionary";
         }
         return "";
     }

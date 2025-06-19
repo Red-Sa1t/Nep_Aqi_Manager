@@ -24,6 +24,8 @@ import java.util.stream.Collectors;
 
 public class NepsFeedbackViewController implements Initializable {
 
+    public static NepsFeedbackViewController instance;
+
     public static final ClassLoader classLoader = NepsFeedbackViewController.class.getClassLoader();
 
     @FXML
@@ -52,6 +54,7 @@ public class NepsFeedbackViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        NepsFeedbackViewController.instance = this;
         // 初始化用户姓名显示
         txt_realName.setText(supervisor.getRealName());
 
@@ -95,7 +98,10 @@ public class NepsFeedbackViewController implements Initializable {
                 new IntegerFilter<>("编号", AqiFeedback::getAfId)
         );
 
-        // 加载数据（仅加载当前用户反馈）
+        RefreshTable();
+    }
+
+    public void RefreshTable() {
         ObservableList<AqiFeedback> data = FXCollections.observableArrayList();
         try (InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json")) {
             List<AqiFeedback> afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {

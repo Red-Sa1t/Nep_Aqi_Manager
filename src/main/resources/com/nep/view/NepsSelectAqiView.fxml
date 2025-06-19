@@ -30,34 +30,35 @@
 
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <Label text="所在省:"/>
-                    <MFXComboBox fx:id="txt_province" prefWidth="150.0"/>
+                    <MFXComboBox fx:id="txt_province" prefWidth="150.0" onKeyPressed="#handleEnterKey"/>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <Label text="所在市:"/>
-                    <MFXComboBox fx:id="txt_city" prefWidth="150.0"/>
+                    <MFXComboBox fx:id="txt_city" prefWidth="150.0" onKeyPressed="#handleEnterKey"/>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <Label text="具体地址:"/>
-                    <MFXTextField fx:id="txt_address" prefWidth="150.0"/>
+                    <MFXTextField fx:id="txt_address" prefWidth="150.0" onKeyPressed="#handleEnterKey"/>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <Label text="预估AQI等级:"/>
-                    <MFXComboBox fx:id="txt_level" prefWidth="150.0"/>
+                    <MFXComboBox fx:id="txt_level" prefWidth="150.0" onKeyPressed="#handleEnterKey"/>
                 </HBox>
 
                 <Label text="请填写反馈信息:"/>
-                <TextArea fx:id="txt_information" prefHeight="100.0" wrapText="true"/>
+                <TextArea fx:id="txt_information" prefHeight="100.0" wrapText="true" onKeyPressed="#handleEnterKey"/>
 
                 <HBox alignment="CENTER_RIGHT" spacing="10.0">
                     <Label text="公众监督员:"/>
-                    <Label fx:id="label_realName" prefWidth="80.0"/>
+                    <Label fx:id="label_realName" prefWidth="80.0" onKeyPressed="#handleEnterKey"/>
                 </HBox>
 
-                <MFXButton onAction="#saveFeedBack" prefHeight="40.0" prefWidth="140.0" styleClass="button-primary"
-                           text="提交反馈数据"/>
+                <MFXButton onAction="#saveFeedBack" style="-fx-background-color: -mfx-orange;-fx-text-fill: white"
+                           prefHeight="40.0" prefWidth="140.0" styleClass="button-primary"
+                           text="提交反馈数据" onKeyPressed="#handleEnterKey"/>
             </VBox>
         </StackPane>
 

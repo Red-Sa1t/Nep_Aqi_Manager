@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class Pm_LevelController {
+public class NepmSo2LevelController {
 
     public BarChart barChart;
     @FXML
@@ -28,7 +28,7 @@ public class Pm_LevelController {
 
     @FXML
     private void initialize() {
-        loadSpmData();
+        loadSO2Data();
         setupChartInteractions();
         loadProvinceCOData();
     }
@@ -52,7 +52,7 @@ public class Pm_LevelController {
 
             for (Map<String, Object> item : dataList) {
                 String province = (String) item.get("proviceName");
-                int level = ((Number) item.get("pm_level")).intValue();
+                int level = ((Number) item.get("so2_level")).intValue();
 
                 if (level < 1 || level > 6) continue;
 
@@ -96,21 +96,20 @@ public class Pm_LevelController {
         }
     }
 
-    private void loadSpmData() {
+    private void loadSO2Data() {
         try {
             // 读取 JSON 文件
             ObjectMapper objectMapper = new ObjectMapper();
             List<Map<String, Object>> dataList = objectMapper.readValue(new File("src/main/resources/NepDatas/JSONData/aqi_finish.json"), List.class);
-
-            // 提取 spm_level 数据
-            int[] spmLevels = new int[dataList.size()];
+            // 提取 so2_level 数据
+            int[] so2Levels = new int[dataList.size()];
             for (int i = 0; i < dataList.size(); i++) {
-                spmLevels[i] = ((Number) dataList.get(i).get("pm_level")).intValue();
+                so2Levels[i] = ((Number) dataList.get(i).get("so2_level")).intValue();
             }
 
             // 统计每个等级出现的次数
             int[] levelCounts = new int[7]; // 0-6级
-            for (int level : spmLevels) {
+            for (int level : so2Levels) {
                 if (level >= 1 && level <= 6) {
                     levelCounts[level]++;
                 }
@@ -120,7 +119,7 @@ public class Pm_LevelController {
             ObservableList<PieChart.Data> chartData = FXCollections.observableArrayList();
             String[] levelNames = {"", "一级", "二级", "三级", "四级", "五级", "六级"};
 
-            int total = spmLevels.length;
+            int total = so2Levels.length;
             for (int i = 1; i <= 6; i++) {
                 if (levelCounts[i] > 0) {
                     double percentage = (double) levelCounts[i] / total * 100;

@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -135,7 +136,6 @@ public class NepmAqiAssignViewController implements Initializable {
     }
 
     public void assignGridMember(){
-        //前做判断
         if(label_afId.getText().equals("无")){
             TipsManager.getInstance().showError("未找到要指派的反馈信息");
             return;
@@ -148,6 +148,7 @@ public class NepmAqiAssignViewController implements Initializable {
         aqiFeedbackService.assignGridMember(afId, combo_realName.getValue());
         TipsManager.getInstance().showInfo("网格员指派成功");
         initConroller();
+        NepmAqiInfoViewController.getInstance().RefreshTable();
     }
 
     // 界面空间初始化方法
@@ -162,5 +163,9 @@ public class NepmAqiAssignViewController implements Initializable {
         label_infomation.setText("无");
         label_proviceName.setText("无");
         combo_realName.setValue("请选择网格员");
+    }
+
+    public void handleEnterKey(KeyEvent keyEvent) {
+        assignGridMember();
     }
 }

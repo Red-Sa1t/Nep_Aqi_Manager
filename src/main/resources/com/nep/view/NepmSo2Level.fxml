@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600"
-            prefWidth="1000"
-            xmlns="http://javafx.com/javafx/17.0.12"
-            fx:controller="com.nep.controller.Co_LevelController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8"
+            fx:controller="com.nep.controller.NepmSo2LevelController"
+            prefWidth="600" prefHeight="600">
 
     <!-- 主标题 -->
     <Label alignment="CENTER" prefHeight="30"
            style="-fx-font-size: 18; -fx-text-fill: #333; -fx-font-weight: bold;"
-           text="CO污染等级分布"
+           text="SO2污染等级分布"
            AnchorPane.leftAnchor="0.0"
            AnchorPane.rightAnchor="0.0"
            AnchorPane.topAnchor="20.0"/>
@@ -32,7 +32,7 @@
             <PieChart fx:id="pieChart"
                       prefWidth="400" prefHeight="400"
                       legendVisible="true"
-                      title="CO污染等级分布情况"
+                      title="SO2污染等级分布情况"
                       style="-fx-font-size: 12;">
                 <title>
                     <Font size="18"/>
@@ -48,7 +48,7 @@
                        fill="#F5F5F5" stroke="#CCCCCC" strokeWidth="1"/>
             <BarChart fx:id="barChart"
                       prefWidth="460" prefHeight="460"
-                      title="各省份CO等级统计">
+                      title="各省份SO2等级统计">
                 <xAxis>
                     <CategoryAxis label="省份"/>
                 </xAxis>

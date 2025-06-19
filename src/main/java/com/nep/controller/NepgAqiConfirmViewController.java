@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -170,7 +171,34 @@ public class NepgAqiConfirmViewController implements Initializable {
     @FXML
     public void confirmData() {
         try {
+            if (txt_afId.getText().isEmpty() ||
+                    txt_so2.getText().isEmpty() ||
+                    txt_co.getText().isEmpty() ||
+                    txt_pm.getText().isEmpty()) {
+                TipsManager.getInstance().showError("请填写所有污染物数据和反馈编号");
+                return;
+            }
+
+            AqiFeedback data = new AqiFeedback();
+            try (InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json")) {
+                List<AqiFeedback> afList = objectMapper.readValue(inputStream, new TypeReference<>() {
+                });
+                for (AqiFeedback aqi : afList) {
+                    if (aqi.getAfId().equals(txt_afId)) {
+                        data = aqi;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             AqiFinish afb = new AqiFinish();
+            afb.setAfName(data.getAfName());
+            afb.setProviceName(data.getProviceName());
+            afb.setCityName(data.getCityName());
+            afb.setAddress(data.getAddress());
+            afb.setInfomation(data.getInfomation());
+            afb.setEstimateGrade(data.getEstimateGrade());
+            afb.setDate(data.getDate());
             afb.setAfId(Integer.parseInt(txt_afId.getText()));
             afb.setState("已实测");
             afb.setSo2(Double.parseDouble(txt_so2.getText()));
@@ -211,8 +239,7 @@ public class NepgAqiConfirmViewController implements Initializable {
         label_confirmexplain.setText("");
     }
 
-    @FXML
-    public void cancel() {
-        ((Stage) txt_pane.getScene().getWindow()).close();
+    public void handleEnterKey(KeyEvent keyEvent) {
+        confirmData();
     }
 }

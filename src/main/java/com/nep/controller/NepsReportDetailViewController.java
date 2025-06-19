@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -70,8 +71,18 @@ public class NepsReportDetailViewController implements Initializable {
             reportService.createReport(newReport);
             TipsManager.getInstance().showInfo("报告保存成功");
 
+            afIdField.setText("");
+            pollutionCauseArea.setText("");
+            shortTermSolutionArea.setText("");
+            longTermSolutionArea.setText("");
+
         } catch (NumberFormatException e) {
             TipsManager.getInstance().showError("请输入有效的反馈编号");
         }
+        NepReportViewController.instance.RefreshTable();
+    }
+
+    public void handleEnterKey(KeyEvent keyEvent) {
+        saveReport();
     }
 }

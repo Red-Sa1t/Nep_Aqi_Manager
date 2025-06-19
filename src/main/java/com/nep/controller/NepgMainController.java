@@ -44,7 +44,7 @@ import java.util.ResourceBundle;
 import static com.nep.MFXDemoResourcesLoader.loadURL;
 
 public class NepgMainController implements Initializable {
-    private final Stage stage;
+    private static Stage stage;
     private final ToggleGroup toggleGroup;
     private double xOffset;
     private double yOffset;
@@ -81,6 +81,14 @@ public class NepgMainController implements Initializable {
         ToggleButtonsUtil.addAlwaysOneSelectedSupport(toggleGroup);
     }
 
+    public static void CloseStage() {
+        NepgMainController.stage.close();
+    }
+
+    public static Stage GetStage() {
+        return NepgMainController.stage;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         TipsManager.getInstance().init(rootPane, stage);
@@ -105,12 +113,10 @@ public class NepgMainController implements Initializable {
 
         ScrollUtils.addSmoothScrolling(scrollPane);
 
-        // The only way to get a fucking smooth image in this shitty framework
-        Image image = new Image(MFXDemoResourcesLoader.load("logo_alt.png"), 64, 64, true, true);
+        Image image = new Image(MFXDemoResourcesLoader.load("logo_alt.png"), 100, 100, true, true);
         ImageView logo = new ImageView(image);
-        Circle clip = new Circle(30);
+        Circle clip = new Circle(50, 50, 50);
 
-// Use a listener to update the clip's center whenever the layout bounds of the logo change
         logo.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
             double centerX = newValue.getMinX() + newValue.getWidth() / 2;
             double centerY = newValue.getMinY() + newValue.getHeight() / 2;
@@ -125,11 +131,11 @@ public class NepgMainController implements Initializable {
 
     private void initializeLoader() {
         MFXLoader loader = new MFXLoader();
-//        loader.addView(MFXLoaderBean.of("用户登录", loadURL("view/NepLogin.fxml")).setBeanToNodeMapper(() -> createToggle("fas-stairs", "用户登录")).setDefaultRoot(true).get());
 //        loader.addView(MFXLoaderBean.of("公众监督AQI反馈数据列表", loadURL("view/NepmAqiInfoView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-circle-dot", "公共监督AQI反馈数据列表")).get());
 //        loader.addView(MFXLoaderBean.of("公众监督AQI反馈数据指派", loadURL("view/NepmAqiAssignView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-toggle-on", "公众监督AQI反馈数据指派")).get());
         loader.addView(MFXLoaderBean.of("管理AQI实测数据信息", loadURL("view/NepgAqiConfirmView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-square-caret-down", "管理AQI实测数据信息")).setDefaultRoot(true).get());
         loader.addView(MFXLoaderBean.of("AQI监督报告浏览", loadURL("view/NepReportView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-square-caret-down", "AQI监督报告浏览")).setControllerFactory(c -> new NepReportViewController(stage)).get());
+        loader.addView(MFXLoaderBean.of("切换账号", loadURL("view/NepLogin.fxml")).setBeanToNodeMapper(() -> createToggle("fas-stairs", "切换账号")).get());
 //        loader.addView(MFXLoaderBean.of("网格员AQI实测数据列表", loadURL("view/NepmConfirmInfoView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-comments", "网格员AQI实测数据列表")).get());
 //        loader.addView(MFXLoaderBean.of("历史反馈预估AQI信息列表", loadURL("view/NepsFeedbackView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-italic", "历史反馈预估AQI信息列表")).get());
 //        loader.addView(MFXLoaderBean.of("公众监督员信息反馈", loadURL("view/NepsFeedbackView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-rectangle-list", "公众监督员信息反馈")).get());

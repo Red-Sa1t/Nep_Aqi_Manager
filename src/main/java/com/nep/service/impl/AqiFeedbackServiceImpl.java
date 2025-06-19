@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AqiFeedbackServiceImpl implements AqiFeedbackService {
-    public static ClassLoader classLoader = RWJsonTest.class.getClassLoader();
-    public static ObjectMapper objectMapper = new ObjectMapper();
+    public static final ClassLoader classLoader = RWJsonTest.class.getClassLoader();
+    public static final ObjectMapper objectMapper = new ObjectMapper();
     @Override
     public void saveFeedBack(AqiFeedback afb) {
         List<AqiFeedback> afList = new ArrayList<>();
@@ -41,8 +41,8 @@ public class AqiFeedbackServiceImpl implements AqiFeedbackService {
     @Override
     public void assignGridMember(String afId,String realName) {
         List<AqiFeedback> afList = new ArrayList<>();
-        try {
-            InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/api_feedback.json");
+
+        try (InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json")) {
             afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
             });
 

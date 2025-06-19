@@ -34,6 +34,7 @@ public class NepmConfirmInfoViewController implements Initializable {
     }
 
     private void setupTable() {
+        if (!txt_tableView.getTableColumns().isEmpty()) return;
         MFXTableColumn<AqiFinish> afIdColumn = new MFXTableColumn<>("编号", true, Comparator.comparing(AqiFinish::getAfId));
         MFXTableColumn<AqiFinish> provinceNameColumn = new MFXTableColumn<>("省区域", Comparator.comparing(AqiFinish::getProviceName));
         MFXTableColumn<AqiFinish> cityNameColumn = new MFXTableColumn<>("市区域", Comparator.comparing(AqiFinish::getCityName));
@@ -110,6 +111,10 @@ public class NepmConfirmInfoViewController implements Initializable {
                 new IntegerFilter<>("编号", AqiFinish::getAfId)
         );
 
+        refreshTable();
+    }
+
+    private void refreshTable() {
         ObservableList<AqiFinish> data = FXCollections.observableArrayList();
         try (InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_finish.json")) {
             List<AqiFinish> afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFinish>>() {

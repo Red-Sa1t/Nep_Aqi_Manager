@@ -44,7 +44,7 @@ import java.util.ResourceBundle;
 import static com.nep.MFXDemoResourcesLoader.loadURL;
 
 public class NepsMainController implements Initializable {
-    private final Stage stage;
+    private static Stage stage;
     private final ToggleGroup toggleGroup;
     private double xOffset;
     private double yOffset;
@@ -76,9 +76,17 @@ public class NepsMainController implements Initializable {
     private StackPane logoContainer;
 
     public NepsMainController(Stage stage) {
-        this.stage = stage;
+        NepsMainController.stage = stage;
         this.toggleGroup = new ToggleGroup();
         ToggleButtonsUtil.addAlwaysOneSelectedSupport(toggleGroup);
+    }
+
+    public static void CloseStage() {
+        NepsMainController.stage.close();
+    }
+
+    public static Stage GetStage() {
+        return NepsMainController.stage;
     }
 
     @Override
@@ -105,12 +113,10 @@ public class NepsMainController implements Initializable {
 
         ScrollUtils.addSmoothScrolling(scrollPane);
 
-        // The only way to get a fucking smooth image in this shitty framework
-        Image image = new Image(MFXDemoResourcesLoader.load("logo_alt.png"), 64, 64, true, true);
+        Image image = new Image(MFXDemoResourcesLoader.load("logo_alt.png"), 100, 100, true, true);
         ImageView logo = new ImageView(image);
-        Circle clip = new Circle(30);
+        Circle clip = new Circle(50, 50, 50);
 
-// Use a listener to update the clip's center whenever the layout bounds of the logo change
         logo.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
             double centerX = newValue.getMinX() + newValue.getWidth() / 2;
             double centerY = newValue.getMinY() + newValue.getHeight() / 2;
@@ -133,6 +139,7 @@ public class NepsMainController implements Initializable {
         loader.addView(MFXLoaderBean.of("公众监督员信息反馈", loadURL("view/NepsSelectAqiView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-rectangle-list", "公众监督员信息反馈")).get());
         loader.addView(MFXLoaderBean.of("AQI监督报告提交", loadURL("view/NepsReportDetailViewController.fxml")).setBeanToNodeMapper(() -> createToggle("fas-comments", "AQI监督报告提交")).get());
         loader.addView(MFXLoaderBean.of("AQI监督报告浏览", loadURL("view/NepReportView.fxml")).setBeanToNodeMapper(() -> createToggle("fas-square-caret-down", "AQI监督报告浏览")).setControllerFactory(c -> new NepReportViewController(stage)).get());
+        loader.addView(MFXLoaderBean.of("切换账号", loadURL("view/NepLogin.fxml")).setBeanToNodeMapper(() -> createToggle("fas-stairs", "切换账号")).get());
         loader.setOnLoadedAction(beans -> {
             List<ToggleButton> nodes = beans.stream()
                     .map(bean -> {

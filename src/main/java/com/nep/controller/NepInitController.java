@@ -43,7 +43,7 @@ import java.util.ResourceBundle;
 
 import static com.nep.MFXDemoResourcesLoader.loadURL;
 
-public class InitController implements Initializable {
+public class NepInitController implements Initializable {
     public static Stage stage = null;
     private double xOffset;
     private double yOffset;
@@ -76,14 +76,18 @@ public class InitController implements Initializable {
     @FXML
     private StackPane logoContainer;
 
-    public InitController(Stage stage) {
+    public NepInitController(Stage stage) {
         this.stage = stage;
         this.toggleGroup = new ToggleGroup();
         ToggleButtonsUtil.addAlwaysOneSelectedSupport(toggleGroup);
     }
 
-    public void CloseStage() {
-        this.stage.close();
+    public static void CloseStage() {
+        NepInitController.stage.close();
+    }
+
+    public static Stage GetStage() {
+        return NepInitController.stage;
     }
 
     @Override
@@ -110,12 +114,10 @@ public class InitController implements Initializable {
 
         ScrollUtils.addSmoothScrolling(scrollPane);
 
-        // The only way to get a fucking smooth image in this shitty framework
-        Image image = new Image(MFXDemoResourcesLoader.load("logo_alt.png"), 64, 64, true, true);
+        Image image = new Image(MFXDemoResourcesLoader.load("logo_alt.png"), 100, 100, true, true);
         ImageView logo = new ImageView(image);
-        Circle clip = new Circle(30);
+        Circle clip = new Circle(50, 50, 50);
 
-// Use a listener to update the clip's center whenever the layout bounds of the logo change
         logo.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
             double centerX = newValue.getMinX() + newValue.getWidth() / 2;
             double centerY = newValue.getMinY() + newValue.getHeight() / 2;

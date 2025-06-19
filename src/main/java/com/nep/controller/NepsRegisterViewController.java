@@ -8,6 +8,7 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXRadioButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class NepsRegisterViewController {
@@ -68,10 +69,19 @@ public class NepsRegisterViewController {
         boolean flag = supervisorService.register(supervisor);
         if(flag){
             TipsManager.getInstance().showInfo("注册成功！");
+            txt_id.setText("");
+            txt_password.setText("");
+            txt_realName.setText("");
+            txt_repassword.setText("");
+
         }else{
             TipsManager.getInstance().showError("手机号已被注册！");
             txt_id.setText("");
             return;
         }
+    }
+
+    public void handleEnterKey(KeyEvent keyEvent) {
+        register();
     }
 }

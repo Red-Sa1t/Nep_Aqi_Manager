@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="450.0"
           prefWidth="450.0" stylesheets="@../css/TextFields.css,@../css/Buttons.css"
-          xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.LoginController">
+          xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.nep.controller.NepLoginController">
 
     <!-- Column Constraints -->
     <columnConstraints>
@@ -59,6 +59,7 @@
         </MFXRadioButton>
         <MFXRadioButton fx:id="rb_supervisor" text="监督员" toggleGroup="$roleToggleGroup"/>
         <MFXRadioButton fx:id="rb_grid" text="网格员" toggleGroup="$roleToggleGroup"/>
+        <MFXRadioButton fx:id="rb_visionary" text="决策者" toggleGroup="$roleToggleGroup"/>
     </HBox>
 
     <MFXTextField fx:id="txt_id" floatMode="BORDER" floatingText="用户名" prefHeight="38.0" prefWidth="205.0"

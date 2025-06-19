@@ -48,7 +48,8 @@
                       GridPane.rowIndex="1"/>
 
         <!-- Detail Button -->
-        <MFXButton id="custom" fx:id="btnShowDetails" prefHeight="50.0" prefWidth="138.0" text="查看详情"
+        <MFXButton fx:id="btnShowDetails" prefHeight="50.0" prefWidth="138.0" text="查看详情"
+                   style="	-fx-background-color: gray;-fx-text-fill: white"
                    GridPane.rowIndex="2"/>
 
     </GridPane>

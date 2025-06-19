@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
@@ -136,5 +137,16 @@ public class NepsSelectAqiViewController implements Initializable {
 
         aqiFeedbackService.saveFeedBack(afb);
         TipsManager.getInstance().showInfo("信息反馈成功！");
+        txt_address.setText("");
+        txt_province.setValue("默认省");
+        txt_city.setValue("默认市");
+        txt_information.setText("");
+        txt_level.setValue("默认等级");
+
+        NepsFeedbackViewController.instance.RefreshTable();
+    }
+
+    public void handleEnterKey(KeyEvent keyEvent) {
+        saveFeedBack();
     }
 }

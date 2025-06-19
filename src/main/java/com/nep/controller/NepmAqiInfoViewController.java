@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class NepmAqiInfoViewController implements Initializable {
+    public static NepmAqiInfoViewController instance;
 
     public static final ClassLoader classLoader = RWJsonTest.class.getClassLoader();
     public static final ObjectMapper objectMapper = new ObjectMapper();
@@ -51,12 +52,18 @@ public class NepmAqiInfoViewController implements Initializable {
         this.stage = stage;
     }
 
+    public static NepmAqiInfoViewController getInstance() {
+        return instance;
+    }
+
     @FXML
     private MFXTableView<AqiFeedback> txt_tableView;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        NepmAqiInfoViewController.instance = this;
         setupTable();
+        RefreshTable();
     }
 
     public void showAssignDialog(AqiFeedback afb) {
@@ -86,15 +93,21 @@ public class NepmAqiInfoViewController implements Initializable {
         }
 
         MFXButton confirmBtn = new MFXButton("确认指派");
+        confirmBtn.setStyle("""
+                -fx-background-color: -mfx-purple;
+                -fx-text-fill: white""");
         confirmBtn.setOnAction(e -> {
             String selected = comboBox.getValue();
             if (selected == null || selected.isEmpty()) {
-                new AqiFeedbackServiceImpl().assignGridMember(afb.getAfId().toString(), selected);
-                TipsManager.getInstance().showInfo("网格员指派成功");
+                TipsManager.getInstance().showWarning("请选择一个网格员");
                 return;
             }
+            new AqiFeedbackServiceImpl().assignGridMember(afb.getAfId().toString(), selected);
+            TipsManager.getInstance().showInfo("网格员指派成功");
             dialog.close();
+            RefreshTable();
         });
+
 
         vbox.getChildren().addAll(label, comboBox, confirmBtn);
         stackPane.getChildren().add(vbox);
@@ -119,9 +132,12 @@ public class NepmAqiInfoViewController implements Initializable {
                 .get();
 
         dialog.showDialog();
+
+        RefreshTable();
     }
 
     private void setupTable() {
+        if (!txt_tableView.getTableColumns().isEmpty()) return;
         MFXTableColumn<AqiFeedback> afIdColumn = new MFXTableColumn<>("数据ID", true, Comparator.comparing(AqiFeedback::getAfId));
         MFXTableColumn<AqiFeedback> provinceNameColumn = new MFXTableColumn<>("省区域", Comparator.comparing(AqiFeedback::getProviceName));
         MFXTableColumn<AqiFeedback> cityNameColumn = new MFXTableColumn<>("市区域", Comparator.comparing(AqiFeedback::getCityName));
@@ -167,7 +183,7 @@ public class NepmAqiInfoViewController implements Initializable {
 
             // 设置点击事件
             assignButton.setOnAction(event -> showAssignDialog(af));
-            assignButton.setId("custom");
+            assignButton.setId("custom_M");
             // 替换显示为按钮
             cell.setGraphic(assignButton);
             cell.setAlignment(Pos.CENTER);
@@ -191,14 +207,14 @@ public class NepmAqiInfoViewController implements Initializable {
         txt_tableView.getFilters().addAll(
                 new IntegerFilter<>("数据ID", AqiFeedback::getAfId)
         );
+    }
 
+    public void RefreshTable() {
         ObservableList<AqiFeedback> data = FXCollections.observableArrayList();
         try (InputStream inputStream = classLoader.getResourceAsStream("NepDatas/JSONData/aqi_feedback.json")) {
             List<AqiFeedback> afList = objectMapper.readValue(inputStream, new TypeReference<List<AqiFeedback>>() {
             });
-            for (AqiFeedback afb : afList) {
-                data.add(afb);
-            }
+            data.addAll(afList);
         } catch (Exception e) {
             e.printStackTrace();
         }

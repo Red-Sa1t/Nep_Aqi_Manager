@@ -21,11 +21,11 @@
     <VBox layoutX="227.0" layoutY="51.0" prefWidth="250.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0"
           AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
-            <Insets bottom="10.0" left="10.0" top="60.0"/>
+            <Insets bottom="10.0" left="10.0" top="30.0"/>
         </padding>
-        <Label graphicTextGap="15.0" styleClass="header" text="东软环保公众监督系统"
-               alignment="CENTER"
-               style="-fx-font-family: 'Source Han Sans SC'; -fx-font-weight: bold; -fx-font-size: 18px;"/>
+        <Label alignment="CENTER" graphicTextGap="15.0" prefHeight="64.0" prefWidth="231.0"
+               style="-fx-font-family: 'Source Han Sans SC'; -fx-font-weight: bold; -fx-font-size: 18px;"
+               styleClass="header" text="东软环保公众监督系统" textAlignment="CENTER"/>
         <Label graphicTextGap="15.0" styleClass="header" text="SUPERVISOR">
             <graphic>
                 <StackPane fx:id="logoContainer"/>

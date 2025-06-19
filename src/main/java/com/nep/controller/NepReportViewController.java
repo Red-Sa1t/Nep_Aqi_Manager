@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class NepReportViewController implements Initializable {
-
+    public static NepReportViewController instance;
     private static final ClassLoader classLoader = RWJsonTest.class.getClassLoader();
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final String REPORT_JSON_PATH = "NepDatas/JSONData/reports.json";
@@ -49,6 +49,7 @@ public class NepReportViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        NepReportViewController.instance = this;
         setupTable();
         btnShowDetails.setOnAction(event -> {
             Report selected = reportTable.getSelectionModel().getSelectedValue();
@@ -106,6 +107,10 @@ public class NepReportViewController implements Initializable {
                 new IntegerFilter<>("报告ID", Report::getReportId)
         );
 
+        RefreshTable();
+    }
+
+    public void RefreshTable() {
         // 加载数据
         ObservableList<Report> data = FXCollections.observableArrayList();
         try (InputStream inputStream = classLoader.getResourceAsStream(REPORT_JSON_PATH)) {
@@ -118,6 +123,7 @@ public class NepReportViewController implements Initializable {
 
         reportTable.setItems(data);
     }
+
     MFXStageDialog dialog;
     @FXML
     private MFXTableView<Report> reportTable;

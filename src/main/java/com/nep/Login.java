@@ -1,6 +1,6 @@
 package com.nep;
 
-import com.nep.controller.InitController;
+import com.nep.controller.NepInitController;
 import fr.brouillard.oss.cssfx.CSSFX;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
 import io.github.palexdev.materialfx.css.themes.Themes;
@@ -29,8 +29,8 @@ public class Login extends Application {
 //			.setGlobal();
 
 
-		FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/Demo.fxml"));
-		loader.setControllerFactory(c -> new InitController(primaryStage));
+		FXMLLoader loader = new FXMLLoader(MFXDemoResourcesLoader.loadURL("view/NepInit.fxml"));
+		loader.setControllerFactory(c -> new NepInitController(primaryStage));
 		Parent root = loader.load();
 
 		Scene scene = new Scene(root);

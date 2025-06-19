@@ -50,8 +50,8 @@
     </GridPane>
 
     <HBox alignment="CENTER_RIGHT" prefHeight="41.0" prefWidth="440.0" spacing="20">
-        <MFXButton id="custom" onAction="#saveReport" prefHeight="46.0" prefWidth="79.0" styleClass="button-primary"
-                   text="保存"/>
+        <MFXButton id="custom_S" onAction="#saveReport" prefHeight="46.0" prefWidth="79.0" styleClass="button-primary"
+                   text="保存" onKeyPressed="#handleEnterKey"/>
     </HBox>
 
 </VBox>
